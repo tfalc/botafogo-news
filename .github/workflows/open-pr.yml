@@ -49,8 +49,8 @@ jobs:
 
           - [ ] Diff revisado
           - [ ] CI (validate-and-build) verde
-          - [ ] Aprovado por revisor
           - [ ] Merge em \`main\` (dispara o deploy no Pages)
+          - [ ] Em repo solo: nao use Approve no proprio PR — o GitHub bloqueia; use Merge
 
           ## Site
 

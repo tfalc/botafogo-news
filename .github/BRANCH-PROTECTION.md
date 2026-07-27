@@ -1,21 +1,26 @@
-# Proteção de `main` (aprovação obrigatória)
+# Proteção de `main` (modo solo)
 
-O repositório usa **`main`** como branch de produção (equivalente ao “master” do fluxo clássico). Deploy no Pages só ocorre após merge em `main`.
+O repositório usa **`main`** como branch de produção. Deploy no Pages só ocorre após merge em `main`.
 
-## Ativar no GitHub (uma vez)
+## Por que não “aprovar o próprio PR”?
 
-1. Abra **Settings → Rules → Rulesets → New branch ruleset** (ou *Branches → Add branch protection rule*).
-2. Target: `main`.
-3. Marque:
-   - **Restrict deletions**
-   - **Require a pull request before merging**
-   - **Require approvals:** `1` (com segundo revisor; em conta solo o dono ainda pode fazer merge se *Do not allow bypassing* estiver off)
-   - **Require review from Code Owners** (opcional — usa [`.github/CODEOWNERS`](CODEOWNERS))
-   - **Require status checks to pass:** `validate-and-build`
-   - **Block force pushes**
-4. Salve o ruleset.
+No GitHub, **o autor de um PR não pode aprová-lo**. Em repo com um único mantenedor, exigir 1+ reviews trava o fluxo.
 
-Já foi aplicada proteção clássica em `main` via API (PR + CI; force push bloqueado). Para modo estrito com segundo revisor, ative *Include administrators* / *Do not allow bypassing* nas Settings.
+Solução usada aqui:
+
+1. Você abre a branch e o Actions cria o PR
+2. Espera o CI (`validate-and-build`) ficar **verde**
+3. Você mesmo revisa o diff e clica em **Merge** (não em Approve)
+
+Não é preciso (nem possível) se autoaprovar.
+
+## Proteção ativa em `main`
+
+- Status check obrigatório: `validate-and-build`
+- Force push / delete de `main` bloqueados
+- **Sem** required approving reviews (modo solo)
+
+Ajuste em **Settings → Branches → Branch protection rules**.
 
 ## Fluxo do dia a dia
 
@@ -23,15 +28,15 @@ Já foi aplicada proteção clássica em `main` via API (PR + CI; force push blo
 feature/minha-mudanca  ──push──►  Actions abre PR → main
                                       │
                                       ▼
-                               revisão + approve
+                               CI verde (validate-and-build)
                                       │
                                       ▼
-                                    merge
+                         você revisa o diff e faz Merge
                                       │
                                       ▼
                           Deploy Pages (workflow Deploy)
 ```
 
-Nomes sugeridos de branch: `feature/…`, `fix/…`, `content/…`, `chore/…`.
+## Se no futuro houver outro revisor
 
-O workflow [`.github/workflows/open-pr.yml`](workflows/open-pr.yml) cria o PR automaticamente em todo push fora de `main`.
+Em Settings → Branches, ative **Require a pull request before merging** com **Required approvals: 1** (e opcionalmente Code Owners).

@@ -25,7 +25,7 @@ A branch de produção é **`main`** (papel de “master”). Não envie commits
 1. Crie uma branch (`feature/…`, `content/…`, `fix/…`, `chore/…`).
 2. Faça commit e `git push -u origin HEAD`.
 3. O workflow **Abrir PR para main** cria o pull request automaticamente.
-4. Aguarde o CI (`validate-and-build`) e **aprove** o PR (Code Owners + proteção de branch).
+4. Aguarde o CI (`validate-and-build`) ficar verde, revise o diff e faça **Merge** (em repo solo não há autoaprovação do autor).
 5. Após o merge em `main`, o workflow **Deploy Portal Fogão** publica no Pages.
 
 Guia de proteção: [`.github/BRANCH-PROTECTION.md`](.github/BRANCH-PROTECTION.md).
@@ -36,7 +36,7 @@ Site após o deploy: [https://tfalc.github.io/botafogo-news/](https://tfalc.gith
 
 1. Edite arquivos em `content/` **ou** use o CRM em `/admin/` (após configurar OAuth em produção).
 2. Commit na sua branch e push (o Actions abre o PR para `main`).
-3. Após aprovação e merge, o workflow valida conteúdo, calcula objetivos, gera JSON e publica o Angular.
+3. Após o CI verde e o merge em `main`, o workflow publica o Angular no Pages.
 
 Localmente:
 
@@ -130,7 +130,7 @@ O CRM estático fica em `/admin` (hub + `conteudo.html` + `tabelas.html`). Para 
 **URL pública:** [https://tfalc.github.io/botafogo-news/](https://tfalc.github.io/botafogo-news/)
 
 1. Settings → Pages → Source: **GitHub Actions**
-2. Merge em `main` (via PR aprovado) dispara o deploy
+2. Merge em `main` (via PR com CI verde) dispara o deploy
 3. Repositório: [tfalc/botafogo-news](https://github.com/tfalc/botafogo-news) — o workflow usa `github.event.repository.name` no `--base-href`
 
 Para rotas profundas no SPA, o workflow publica o `browser` output e copia `index.html` → `404.html` (GitHub Pages serve `404.html` em paths desconhecidos).

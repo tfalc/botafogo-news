@@ -12,7 +12,7 @@
 ## Checklist
 
 - [ ] CI verde (`validate-and-build`)
-- [ ] Revisto por humano (aprovação no PR)
+- [ ] Diff revisado por você (em repo solo: **Merge**, não Approve)
 - [ ] Sem segredos (`.env`, chaves, PDFs de marca)
 
 ## Site (após merge em `main`)
