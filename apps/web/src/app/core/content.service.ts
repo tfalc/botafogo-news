@@ -4,6 +4,7 @@ import { Observable, map, shareReplay } from 'rxjs';
 import {
   Fixtures,
   NewsItem,
+  ObjectivesDashboard,
   ObjectivesSnapshot,
   SiteConfig,
   Standings,
@@ -50,6 +51,10 @@ export class ContentService {
 
   getObjectivesSnapshot(): Observable<ObjectivesSnapshot> {
     return this.http.get<ObjectivesSnapshot>(`${this.base}/objectives/snapshot.json`);
+  }
+
+  getObjectivesDashboard(): Observable<ObjectivesDashboard> {
+    return this.http.get<ObjectivesDashboard>(`${this.base}/objectives/dashboard.json`);
   }
 
   nextMatch(fixtures: Fixtures, team: string): Fixtures['matches'][number] | undefined {

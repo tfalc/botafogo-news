@@ -1,0 +1,18 @@
+{
+  "updatedAt": "2026-07-27",
+  "goals": [
+    { "rank": 1, "name": "Danilo", "value": 7 },
+    { "rank": 2, "name": "Edenilson", "value": 4 },
+    { "rank": 3, "name": "M. Martins", "value": 4 }
+  ],
+  "assists": [
+    { "rank": 1, "name": "Montoro", "value": 3 },
+    { "rank": 2, "name": "Danilo", "value": 2 },
+    { "rank": 3, "name": "Edenilson", "value": 2 }
+  ],
+  "sofascore": [
+    { "rank": 1, "name": "Danilo", "value": 7.36 },
+    { "rank": 2, "name": "Ferraresi", "value": 6.96 },
+    { "rank": 3, "name": "Edenilson", "value": 6.94 }
+  ]
+}

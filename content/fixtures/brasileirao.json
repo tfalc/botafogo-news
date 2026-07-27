@@ -3,58 +3,367 @@
   "season": 2026,
   "matches": [
     {
-      "id": "bra-17-bot-sao",
-      "round": 17,
-      "date": "2026-07-27T16:00:00-03:00",
+      "id": "bra-01-bot-cru",
+      "round": 1,
+      "date": "2026-03-29T16:00:00-03:00",
       "home": "Botafogo",
-      "away": "São Paulo",
-      "status": "scheduled",
-      "venue": "Nilton Santos"
+      "away": "Cruzeiro",
+      "status": "played",
+      "venue": "Nilton Santos",
+      "homeScore": 5,
+      "awayScore": 0
     },
     {
-      "id": "bra-18-flu-bot",
-      "round": 18,
-      "date": "2026-08-03T16:00:00-03:00",
-      "home": "Fluminense",
-      "away": "Botafogo",
-      "status": "scheduled",
-      "venue": "Maracanã"
-    },
-    {
-      "id": "bra-19-bot-bah",
-      "round": 19,
-      "date": "2026-08-10T18:30:00-03:00",
+      "id": "bra-02-bot-grê",
+      "round": 2,
+      "date": "2026-04-05T16:00:00-03:00",
       "home": "Botafogo",
-      "away": "Bahia",
-      "status": "scheduled",
-      "venue": "Nilton Santos"
+      "away": "Grêmio",
+      "status": "played",
+      "venue": "Nilton Santos",
+      "homeScore": 3,
+      "awayScore": 6
     },
     {
-      "id": "bra-20-vas-bot",
-      "round": 20,
-      "date": "2026-08-17T16:00:00-03:00",
-      "home": "Vasco",
-      "away": "Botafogo",
-      "status": "scheduled",
-      "venue": "São Januário"
+      "id": "bra-03-bot-flu",
+      "round": 3,
+      "date": "2026-04-12T16:00:00-03:00",
+      "home": "Botafogo",
+      "away": "Fluminense",
+      "status": "played",
+      "venue": "Nilton Santos",
+      "homeScore": 0,
+      "awayScore": 2
     },
     {
-      "id": "bra-21-bot-pal",
-      "round": 21,
-      "date": "2026-08-24T16:00:00-03:00",
+      "id": "bra-04-bot-vit",
+      "round": 4,
+      "date": "2026-04-19T16:00:00-03:00",
+      "home": "Botafogo",
+      "away": "Vitória",
+      "status": "played",
+      "venue": "Nilton Santos",
+      "homeScore": 3,
+      "awayScore": 1
+    },
+    {
+      "id": "bra-05-bot-ath",
+      "round": 5,
+      "date": "2026-04-26T16:00:00-03:00",
+      "home": "Botafogo",
+      "away": "Athletico-PR",
+      "status": "played",
+      "venue": "Nilton Santos",
+      "homeScore": 1,
+      "awayScore": 5
+    },
+    {
+      "id": "bra-06-bot-fla",
+      "round": 6,
+      "date": "2026-05-03T16:00:00-03:00",
+      "home": "Botafogo",
+      "away": "Flamengo",
+      "status": "played",
+      "venue": "Nilton Santos",
+      "homeScore": 0,
+      "awayScore": 3
+    },
+    {
+      "id": "bra-07-bot-pal",
+      "round": 7,
+      "date": "2026-05-10T16:00:00-03:00",
       "home": "Botafogo",
       "away": "Palmeiras",
-      "status": "scheduled",
-      "venue": "Nilton Santos"
+      "status": "played",
+      "venue": "Nilton Santos",
+      "homeScore": 3,
+      "awayScore": 1
     },
     {
-      "id": "bra-22-fla-bot",
+      "id": "bra-08-bot-bah",
+      "round": 8,
+      "date": "2026-05-17T16:00:00-03:00",
+      "home": "Botafogo",
+      "away": "Bahia",
+      "status": "played",
+      "venue": "Nilton Santos",
+      "homeScore": 1,
+      "awayScore": 1
+    },
+    {
+      "id": "bra-09-bot-sao",
+      "round": 9,
+      "date": "2026-05-24T16:00:00-03:00",
+      "home": "Botafogo",
+      "away": "São Paulo",
+      "status": "played",
+      "venue": "Nilton Santos",
+      "homeScore": 4,
+      "awayScore": 0
+    },
+    {
+      "id": "bra-10-bot-cor",
+      "round": 10,
+      "date": "2026-05-31T16:00:00-03:00",
+      "home": "Botafogo",
+      "away": "Corinthians",
+      "status": "played",
+      "venue": "Nilton Santos",
+      "homeScore": 0,
+      "awayScore": 0
+    },
+    {
+      "id": "bra-11-bot-san",
+      "round": 11,
+      "date": "2026-06-07T16:00:00-03:00",
+      "home": "Botafogo",
+      "away": "Santos",
+      "status": "played",
+      "venue": "Nilton Santos",
+      "homeScore": 2,
+      "awayScore": 2
+    },
+    {
+      "id": "bra-12-bot-int",
+      "round": 12,
+      "date": "2026-06-14T16:00:00-03:00",
+      "home": "Botafogo",
+      "away": "Internacional",
+      "status": "played",
+      "venue": "Nilton Santos",
+      "homeScore": 2,
+      "awayScore": 0
+    },
+    {
+      "id": "bra-13-bot-atl",
+      "round": 13,
+      "date": "2026-06-21T16:00:00-03:00",
+      "home": "Botafogo",
+      "away": "Atlético-MG",
+      "status": "played",
+      "venue": "Nilton Santos",
+      "homeScore": 3,
+      "awayScore": 0
+    },
+    {
+      "id": "bra-14-bot-bra",
+      "round": 14,
+      "date": "2026-06-28T16:00:00-03:00",
+      "home": "Botafogo",
+      "away": "Bragantino",
+      "status": "played",
+      "venue": "Nilton Santos",
+      "homeScore": 0,
+      "awayScore": 2
+    },
+    {
+      "id": "bra-15-bot-vas",
+      "round": 15,
+      "date": "2026-07-05T16:00:00-03:00",
+      "home": "Botafogo",
+      "away": "Vasco da Gama",
+      "status": "played",
+      "venue": "Nilton Santos",
+      "homeScore": 1,
+      "awayScore": 1
+    },
+    {
+      "id": "bra-16-bot-cor",
+      "round": 16,
+      "date": "2026-07-12T16:00:00-03:00",
+      "home": "Botafogo",
+      "away": "Coritiba",
+      "status": "played",
+      "venue": "Nilton Santos",
+      "homeScore": 3,
+      "awayScore": 2
+    },
+    {
+      "id": "bra-17-bot-mir",
+      "round": 17,
+      "date": "2026-07-19T16:00:00-03:00",
+      "home": "Botafogo",
+      "away": "Mirassol",
+      "status": "played",
+      "venue": "Nilton Santos",
+      "homeScore": 2,
+      "awayScore": 1
+    },
+    {
+      "id": "bra-18-bot-rem",
+      "round": 18,
+      "date": "2026-07-26T16:00:00-03:00",
+      "home": "Botafogo",
+      "away": "Remo",
+      "status": "played",
+      "venue": "Nilton Santos",
+      "homeScore": 0,
+      "awayScore": 0
+    },
+    {
+      "id": "bra-19-bot-cha",
+      "round": 19,
+      "date": "2026-08-02T16:00:00-03:00",
+      "home": "Botafogo",
+      "away": "Chapecoense",
+      "status": "played",
+      "venue": "Nilton Santos",
+      "homeScore": 0,
+      "awayScore": 2
+    },
+    {
+      "id": "bra-20-cru-bot",
+      "round": 20,
+      "date": "2026-08-09T16:00:00-03:00",
+      "home": "Cruzeiro",
+      "away": "Botafogo",
+      "status": "played",
+      "homeScore": 3,
+      "awayScore": 1
+    },
+    {
+      "id": "bra-21-grê-bot",
+      "round": 21,
+      "date": "2026-08-16T16:00:00-03:00",
+      "home": "Grêmio",
+      "away": "Botafogo",
+      "status": "scheduled"
+    },
+    {
+      "id": "bra-22-flu-bot",
       "round": 22,
-      "date": "2026-08-31T16:00:00-03:00",
+      "date": "2026-08-23T16:00:00-03:00",
+      "home": "Fluminense",
+      "away": "Botafogo",
+      "status": "scheduled"
+    },
+    {
+      "id": "bra-23-vit-bot",
+      "round": 23,
+      "date": "2026-08-30T16:00:00-03:00",
+      "home": "Vitória",
+      "away": "Botafogo",
+      "status": "scheduled"
+    },
+    {
+      "id": "bra-24-ath-bot",
+      "round": 24,
+      "date": "2026-09-06T16:00:00-03:00",
+      "home": "Athletico-PR",
+      "away": "Botafogo",
+      "status": "scheduled"
+    },
+    {
+      "id": "bra-25-fla-bot",
+      "round": 25,
+      "date": "2026-09-13T16:00:00-03:00",
       "home": "Flamengo",
       "away": "Botafogo",
-      "status": "scheduled",
-      "venue": "Maracanã"
+      "status": "scheduled"
+    },
+    {
+      "id": "bra-26-pal-bot",
+      "round": 26,
+      "date": "2026-09-20T16:00:00-03:00",
+      "home": "Palmeiras",
+      "away": "Botafogo",
+      "status": "scheduled"
+    },
+    {
+      "id": "bra-27-bah-bot",
+      "round": 27,
+      "date": "2026-09-27T16:00:00-03:00",
+      "home": "Bahia",
+      "away": "Botafogo",
+      "status": "scheduled"
+    },
+    {
+      "id": "bra-28-sao-bot",
+      "round": 28,
+      "date": "2026-10-04T16:00:00-03:00",
+      "home": "São Paulo",
+      "away": "Botafogo",
+      "status": "scheduled"
+    },
+    {
+      "id": "bra-29-cor-bot",
+      "round": 29,
+      "date": "2026-10-11T16:00:00-03:00",
+      "home": "Corinthians",
+      "away": "Botafogo",
+      "status": "scheduled"
+    },
+    {
+      "id": "bra-30-san-bot",
+      "round": 30,
+      "date": "2026-10-18T16:00:00-03:00",
+      "home": "Santos",
+      "away": "Botafogo",
+      "status": "scheduled"
+    },
+    {
+      "id": "bra-31-int-bot",
+      "round": 31,
+      "date": "2026-10-25T16:00:00-03:00",
+      "home": "Internacional",
+      "away": "Botafogo",
+      "status": "scheduled"
+    },
+    {
+      "id": "bra-32-atl-bot",
+      "round": 32,
+      "date": "2026-11-01T16:00:00-03:00",
+      "home": "Atlético-MG",
+      "away": "Botafogo",
+      "status": "scheduled"
+    },
+    {
+      "id": "bra-33-bra-bot",
+      "round": 33,
+      "date": "2026-11-08T16:00:00-03:00",
+      "home": "Bragantino",
+      "away": "Botafogo",
+      "status": "scheduled"
+    },
+    {
+      "id": "bra-34-vas-bot",
+      "round": 34,
+      "date": "2026-11-15T16:00:00-03:00",
+      "home": "Vasco da Gama",
+      "away": "Botafogo",
+      "status": "scheduled"
+    },
+    {
+      "id": "bra-35-cor-bot",
+      "round": 35,
+      "date": "2026-11-22T16:00:00-03:00",
+      "home": "Coritiba",
+      "away": "Botafogo",
+      "status": "scheduled"
+    },
+    {
+      "id": "bra-36-mir-bot",
+      "round": 36,
+      "date": "2026-11-29T16:00:00-03:00",
+      "home": "Mirassol",
+      "away": "Botafogo",
+      "status": "scheduled"
+    },
+    {
+      "id": "bra-37-rem-bot",
+      "round": 37,
+      "date": "2026-12-06T16:00:00-03:00",
+      "home": "Remo",
+      "away": "Botafogo",
+      "status": "scheduled"
+    },
+    {
+      "id": "bra-38-cha-bot",
+      "round": 38,
+      "date": "2026-12-13T16:00:00-03:00",
+      "home": "Chapecoense",
+      "away": "Botafogo",
+      "status": "scheduled"
     }
   ]
 }

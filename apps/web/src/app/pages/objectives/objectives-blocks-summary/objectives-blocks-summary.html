@@ -1,0 +1,51 @@
+<section class="fases-resumo" aria-labelledby="fases-resumo-heading">
+  <header class="fases-resumo__head">
+    <p class="eyebrow">Calendário</p>
+    <h2 id="fases-resumo-heading">
+      <span class="emo" aria-hidden="true">🗓️</span>
+      Pontos por fase
+    </h2>
+    <p>A temporada em seis trechos — quanto já rendeu cada um.</p>
+  </header>
+
+  <ol class="rail">
+    @for (block of dashboard().blocks; track block.id) {
+      <li class="rail__item" [class.rail__item--dim]="block.state === 'upcoming'">
+        <div class="rail__meta">
+          <span class="rail__label">{{ block.label }}</span>
+          @if (block.state !== 'upcoming') {
+            <strong
+              >{{ block.points | number: '2.0-0' }}
+              <small>/ {{ block.maxPoints }}</small></strong
+            >
+          } @else {
+            <strong class="muted">—</strong>
+          }
+        </div>
+        <div
+          class="rail__bar"
+          role="meter"
+          [attr.aria-valuenow]="block.state === 'upcoming' ? 0 : block.points"
+          [attr.aria-valuemin]="0"
+          [attr.aria-valuemax]="block.maxPoints"
+          [attr.aria-label]="block.label + ': ' + block.points + ' de ' + block.maxPoints + ' pontos'"
+        >
+          <span class="rail__fill" [style.width.%]="fillPct(block)"></span>
+        </div>
+        <span class="rail__state">
+          @switch (block.state) {
+            @case ('complete') {
+              Encerrada
+            }
+            @case ('partial') {
+              Em andamento
+            }
+            @default {
+              Próxima
+            }
+          }
+        </span>
+      </li>
+    }
+  </ol>
+</section>

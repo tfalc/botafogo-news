@@ -1,0 +1,77 @@
+<section class="situacao" aria-labelledby="situacao-heading">
+  <header class="situacao__head">
+    <div>
+      <p class="eyebrow">Agora</p>
+      <h2 id="situacao-heading">
+        <span class="emo" aria-hidden="true">⏱️</span>
+        Situação na rodada
+      </h2>
+    </div>
+    <p class="situacao__round">
+      <span>{{ dashboard().summary.round }}</span>
+      <small>/ {{ dashboard().summary.totalRounds }}</small>
+    </p>
+  </header>
+
+  <dl class="stats">
+    <div>
+      <dt><span class="emo" aria-hidden="true">📍</span> Posição</dt>
+      <dd>{{ dashboard().summary.position }}º</dd>
+    </div>
+    <div>
+      <dt><span class="emo" aria-hidden="true">➕</span> Pontos</dt>
+      <dd>{{ dashboard().summary.points }}</dd>
+    </div>
+    <div>
+      <dt><span class="emo" aria-hidden="true">⭐</span> Vitórias</dt>
+      <dd>{{ dashboard().summary.wins | number: '2.0-0' }}</dd>
+    </div>
+    <div>
+      <dt><span class="emo" aria-hidden="true">⚽</span> Gols</dt>
+      <dd>{{ dashboard().summary.goals }}</dd>
+    </div>
+    <div>
+      <dt><span class="emo" aria-hidden="true">📈</span> Aproveitamento</dt>
+      <dd>{{ dashboard().summary.aproveitamento }}%</dd>
+    </div>
+  </dl>
+
+  <div class="leaders" aria-label="Destaques individuais">
+    <article>
+      <h3><span class="emo" aria-hidden="true">⚽</span> Artilharia</h3>
+      <ol>
+        @for (entry of dashboard().leaders.goals; track entry.rank) {
+          <li>
+            <span class="rank">{{ entry.rank }}</span>
+            <span class="name">{{ entry.name }}</span>
+            <span class="val">{{ entry.value }}</span>
+          </li>
+        }
+      </ol>
+    </article>
+    <article>
+      <h3><span class="emo" aria-hidden="true">👟</span> Assistências</h3>
+      <ol>
+        @for (entry of dashboard().leaders.assists; track entry.rank) {
+          <li>
+            <span class="rank">{{ entry.rank }}</span>
+            <span class="name">{{ entry.name }}</span>
+            <span class="val">{{ entry.value }}</span>
+          </li>
+        }
+      </ol>
+    </article>
+    <article>
+      <h3><span class="emo" aria-hidden="true">📋</span> Nota média</h3>
+      <ol>
+        @for (entry of dashboard().leaders.sofascore; track entry.rank) {
+          <li>
+            <span class="rank">{{ entry.rank }}</span>
+            <span class="name">{{ entry.name }}</span>
+            <span class="val">{{ entry.value | number: '1.2-2' }}</span>
+          </li>
+        }
+      </ol>
+    </article>
+  </div>
+</section>

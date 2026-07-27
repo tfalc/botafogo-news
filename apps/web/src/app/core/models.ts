@@ -101,3 +101,83 @@ export interface ObjectivesSnapshot {
   };
   objectives: ObjectiveResult[];
 }
+
+export interface LeaderEntry {
+  rank: number;
+  name: string;
+  value: number;
+}
+
+export interface DashboardMatch {
+  round: number;
+  home: string;
+  away: string;
+  homeAbbrev: string;
+  awayAbbrev: string;
+  homeScore: number | null;
+  awayScore: number | null;
+  status: string;
+  result: 'W' | 'L' | 'D' | null;
+  isHome: boolean | null;
+}
+
+export interface DashboardBlockObjective {
+  id: string;
+  label: string;
+  color: string;
+  meta: number;
+  acumulado: number;
+  metaPct: number;
+  pointsPct: number;
+}
+
+export interface DashboardBlock {
+  id: string;
+  label: string;
+  rounds: number[];
+  points: number;
+  maxPoints: number;
+  state: 'upcoming' | 'partial' | 'complete';
+  active: boolean;
+  matches: DashboardMatch[];
+  objectives: DashboardBlockObjective[];
+}
+
+export interface SeasonBarMarker {
+  id: string;
+  label: string;
+  points: number;
+  color: string;
+  pctPoints: number;
+  pctAproveitamento: number;
+}
+
+export interface ObjectivesDashboard {
+  team: string;
+  competition: string;
+  season: number;
+  generatedAt: string;
+  summary: {
+    round: number;
+    totalRounds: number;
+    position: number;
+    points: number;
+    wins: number;
+    goals: number;
+    aproveitamento: number;
+    played: number;
+  };
+  leaders: {
+    goals: LeaderEntry[];
+    assists: LeaderEntry[];
+    sofascore: LeaderEntry[];
+  };
+  positionByRound: Array<number | null>;
+  seasonBars: {
+    points: { value: number; max: number; label: string };
+    aproveitamento: { value: number; max: number; label: string };
+    markers: SeasonBarMarker[];
+  };
+  thresholds: Array<{ id: string; label: string; seasonPoints: number; color: string }>;
+  blocks: DashboardBlock[];
+}

@@ -1,0 +1,106 @@
+<section class="path" aria-labelledby="path-heading">
+  <header class="path__head">
+    <p class="eyebrow">Campanha</p>
+    <h2 id="path-heading">
+      <span class="emo" aria-hidden="true">📉</span>
+      Caminho na tabela
+    </h2>
+    <p>Posição após cada rodada — 1º no topo, 20º na base.</p>
+  </header>
+
+  <figure class="path__figure">
+    <svg
+      class="chart"
+      [attr.viewBox]="'0 0 ' + chart().width + ' ' + chart().height"
+      role="img"
+      [attr.aria-label]="
+        'Posição do Botafogo da rodada 1 à ' + dashboard().summary.round
+      "
+    >
+      @for (y of chart().yTicks; track y) {
+        <line
+          class="grid"
+          [attr.x1]="chart().padL"
+          [attr.x2]="chart().padL + chart().plotW"
+          [attr.y1]="chart().yAt(y)"
+          [attr.y2]="chart().yAt(y)"
+        />
+        <text class="axis" [attr.x]="chart().padL - 8" [attr.y]="chart().yAt(y) + 4" text-anchor="end">
+          {{ y }}º
+        </text>
+      }
+      @for (x of chart().xTicks; track x) {
+        <text
+          class="axis"
+          [attr.x]="chart().xAt(x)"
+          [attr.y]="chart().height - 6"
+          text-anchor="middle"
+        >
+          {{ x }}
+        </text>
+      }
+      @if (chart().area) {
+        <polygon class="area" [attr.points]="chart().area" />
+      }
+      @if (chart().points) {
+        <polyline class="line" fill="none" [attr.points]="chart().points" />
+      }
+    </svg>
+    <figcaption>Linha da classificação · rodadas 1–{{ dashboard().summary.totalRounds }}</figcaption>
+  </figure>
+
+  <div class="meters" aria-label="Progresso de pontos e aproveitamento">
+    <div class="meter">
+      <div class="meter__top">
+        <span>Pontos na temporada</span>
+        <strong>{{ dashboard().seasonBars.points.label }}</strong>
+      </div>
+      <div class="meter__body">
+        <ul class="meter__ticks" aria-hidden="true">
+          @for (m of dashboard().seasonBars.markers; track m.id; let i = $index) {
+            <li
+              [style.left.%]="m.pctPoints"
+              [class.meter__tick--up]="i % 2 === 0"
+              [class.meter__tick--down]="i % 2 === 1"
+            >
+              <span class="tick-label">{{ m.label }}</span>
+              <span class="tick"></span>
+            </li>
+          }
+        </ul>
+        <div
+          class="meter__track"
+          role="meter"
+          [attr.aria-valuenow]="dashboard().seasonBars.points.value"
+          [attr.aria-valuemin]="0"
+          [attr.aria-valuemax]="dashboard().seasonBars.points.max"
+          [attr.aria-label]="
+            'Pontos: ' +
+            dashboard().seasonBars.points.value +
+            '. Metas: ' +
+            markerSummary()
+          "
+        >
+          <div class="meter__fill" [style.width.%]="pointsFillPct()"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="meter">
+      <div class="meter__top">
+        <span>Aproveitamento</span>
+        <strong>{{ dashboard().seasonBars.aproveitamento.label }}</strong>
+      </div>
+      <div
+        class="meter__track"
+        role="meter"
+        [attr.aria-valuenow]="dashboard().seasonBars.aproveitamento.value"
+        [attr.aria-valuemin]="0"
+        [attr.aria-valuemax]="100"
+        [attr.aria-label]="'Aproveitamento: ' + dashboard().seasonBars.aproveitamento.value + '%'"
+      >
+        <div class="meter__fill" [style.width.%]="aproveitamentoFillPct()"></div>
+      </div>
+    </div>
+  </div>
+</section>

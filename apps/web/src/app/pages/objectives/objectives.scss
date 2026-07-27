@@ -1,78 +1,159 @@
 .page {
   padding: clamp(2rem, 5vw, 4rem) clamp(1rem, 4vw, 3rem);
-  max-width: 1100px;
+  max-width: 1080px;
   margin: 0 auto;
 }
 
-.page__header h1 {
-  font-family: var(--font-display);
-  font-size: clamp(2.2rem, 5vw, 3.4rem);
-  margin: 0 0 0.5rem;
+.masthead {
+  position: relative;
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
 }
 
-.page__header p {
-  color: rgba(255, 255, 255, 0.7);
-  max-width: 40rem;
-  margin: 0 0 1.75rem;
+.masthead::before {
+  content: "";
+  position: absolute;
+  inset: -1rem -4% auto;
+  height: 6rem;
+  background: repeating-linear-gradient(
+    -12deg,
+    transparent 0 18px,
+    rgba(255, 255, 255, 0.03) 18px 19px
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.masthead__eyebrow,
+.masthead h1,
+.masthead__lead {
+  position: relative;
+  z-index: 1;
+}
+
+.masthead__eyebrow {
+  margin: 0 0 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.55);
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.masthead h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 6vw, 4rem);
+  line-height: 0.95;
+  margin: 0 0 0.75rem;
+}
+
+.masthead__lead {
+  margin: 0;
+  max-width: 36rem;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 1.05rem;
+  line-height: 1.55;
+}
+
+.section-head {
+  margin: 0 0 1.25rem;
+}
+
+.section-head h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 3.5vw, 2.4rem);
+  margin: 0 0 0.35rem;
+  letter-spacing: 0.02em;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.section-head p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.58);
+  max-width: 34rem;
+}
+
+.emo {
+  font-style: normal;
+  font-family: "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", sans-serif;
+  line-height: 1;
+}
+
+.phases {
+  margin: clamp(2rem, 4vw, 3rem) 0;
+}
+
+.goals {
+  margin: 0 0 clamp(2rem, 4vw, 3rem);
+  padding-bottom: clamp(1.5rem, 3vw, 2rem);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
 }
 
 .summary {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 1rem;
-  margin-bottom: 0.75rem;
+  margin-bottom: 1.35rem;
 }
 
 .summary .label {
-  display: block;
-  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.72rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: rgba(255, 255, 255, 0.5);
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.2rem;
 }
 
 .summary strong {
   font-family: var(--font-display);
-  font-size: 2rem;
-}
-
-.generated {
-  font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.45);
-  margin-bottom: 1.75rem;
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+  letter-spacing: 0.02em;
 }
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
 }
 
 .obj {
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  padding: 1.25rem;
-  background: rgba(255, 255, 255, 0.03);
-  animation: rise 0.55s ease both;
+  border-top: 2px solid rgba(255, 255, 255, 0.55);
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1.15rem 1.15rem 1.25rem;
+  background: rgba(255, 255, 255, 0.02);
+  animation: rise 0.5s ease both;
 }
 
 .obj:nth-child(2) {
-  animation-delay: 0.08s;
+  animation-delay: 0.06s;
 }
 .obj:nth-child(3) {
-  animation-delay: 0.16s;
+  animation-delay: 0.12s;
 }
 .obj:nth-child(4) {
+  animation-delay: 0.18s;
+}
+.obj:nth-child(5) {
   animation-delay: 0.24s;
 }
 
 .obj--in {
-  border-color: rgba(255, 255, 255, 0.55);
-  background: rgba(255, 255, 255, 0.08);
+  border-top-color: #fff;
+  background: rgba(255, 255, 255, 0.06);
 }
 
 .obj--danger {
-  border-color: rgba(255, 255, 255, 0.35);
+  border-top-color: rgba(255, 255, 255, 0.35);
 }
 
 .obj header {
@@ -83,24 +164,36 @@
   margin-bottom: 0.5rem;
 }
 
-.obj h2 {
+.obj h3 {
   font-family: var(--font-display);
-  font-size: 1.35rem;
+  font-size: 1.45rem;
   margin: 0;
+  letter-spacing: 0.02em;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.obj__emo {
+  font-size: 1.15rem;
+  line-height: 1;
+  font-family: "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", sans-serif;
 }
 
 .pill {
-  font-size: 0.68rem;
+  font-size: 0.65rem;
   text-transform: uppercase;
   letter-spacing: 0.06em;
   white-space: nowrap;
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.35);
   padding: 0.2rem 0.4rem;
+  color: rgba(255, 255, 255, 0.75);
 }
 
 .desc {
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 0.68);
   font-size: 0.95rem;
+  margin: 0;
 }
 
 dl {
@@ -110,23 +203,24 @@ dl {
 }
 
 dt {
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.48);
 }
 
 dd {
-  margin: 0.15rem 0 0;
+  margin: 0.12rem 0 0;
   font-weight: 700;
 }
 
 .tone {
   font-style: italic;
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.78);
   margin: 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
   padding-top: 0.85rem;
+  font-size: 0.95rem;
 }
 
 .loading {
@@ -137,10 +231,22 @@ dd {
 @keyframes rise {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(8px);
   }
   to {
     opacity: 1;
     transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .obj {
+    animation: none;
+  }
+}
+
+@media (max-width: 700px) {
+  .summary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }

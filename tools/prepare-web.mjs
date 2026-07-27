@@ -20,7 +20,7 @@ function runOrExit(args) {
 }
 
 runOrExit(['tools/validate_content.py']);
-runOrExit(['tools/compute_objectives.py']);
+runOrExit(['tools/run_objectives.py']);
 runOrExit(['tools/build_content.py']);
 
 const adminSrc = join(root, 'admin');

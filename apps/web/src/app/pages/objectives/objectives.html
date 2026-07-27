@@ -1,80 +1,116 @@
 @if (snapshot(); as data) {
   <section class="page">
-    <header class="page__header">
+    <header class="masthead">
+      <p class="masthead__eyebrow">
+        <span class="emo" aria-hidden="true">⬛</span>
+        Brasileirão {{ data.season }}
+      </p>
       <h1>Objetivos da temporada</h1>
-      <p>
-        Estilo planilha FogaoNET: quanto falta (no cenário otimista) para título, Libertadores,
-        Sul-Americana e para ficar longe da Z4.
+      <p class="masthead__lead">
+        Onde o Fogão está, como chegou até aqui e quanto falta — no cenário otimista — para cada
+        meta da campanha.
       </p>
     </header>
 
-    <div class="summary">
-      <div>
-        <span class="label">Posição</span>
-        <strong>{{ data.summary.position }}º</strong>
-      </div>
-      <div>
-        <span class="label">Pontos</span>
-        <strong>{{ data.summary.points }}</strong>
-      </div>
-      <div>
-        <span class="label">Jogos restantes</span>
-        <strong>{{ data.summary.remainingMatches }}</strong>
-      </div>
-      <div>
-        <span class="label">Teto de pontos</span>
-        <strong>{{ data.summary.maxPoints }}</strong>
-      </div>
-    </div>
+    <section class="goals" aria-labelledby="goals-heading">
+      <header class="section-head">
+        <h2 id="goals-heading">
+          <span class="emo" aria-hidden="true">🎯</span>
+          Quanto falta
+        </h2>
+        <p>
+          Gap otimista: rivais estagnam e o Botafogo aproveita o que resta do calendário.
+        </p>
+      </header>
 
-    <p class="generated">
-      Snapshot gerado em {{ data.generatedAt | date: "d MMM y HH:mm" : undefined : "pt-BR" }}
-    </p>
+      <div class="summary" aria-label="Resumo da classificação">
+        <div>
+          <span class="label"><span class="emo" aria-hidden="true">📍</span> Posição</span>
+          <strong>{{ data.summary.position }}º</strong>
+        </div>
+        <div>
+          <span class="label"><span class="emo" aria-hidden="true">➕</span> Pontos</span>
+          <strong>{{ data.summary.points }}</strong>
+        </div>
+        <div>
+          <span class="label"><span class="emo" aria-hidden="true">📅</span> Jogos restantes</span>
+          <strong>{{ data.summary.remainingMatches }}</strong>
+        </div>
+        <div>
+          <span class="label"><span class="emo" aria-hidden="true">🚀</span> Teto de pontos</span>
+          <strong>{{ data.summary.maxPoints }}</strong>
+        </div>
+      </div>
 
-    <div class="grid">
-      @for (obj of data.objectives; track obj.id) {
-        <article
-          class="obj"
-          [class.obj--ok]="obj.stillPossible"
-          [class.obj--in]="obj.inZone"
-          [class.obj--danger]="obj.inDanger"
-        >
-          <header>
-            <h2>{{ obj.label }}</h2>
-            <span class="pill">
-              @if (obj.inDanger) {
-                Na zona
-              } @else if (obj.inZone) {
-                Na zona
-              } @else {
-                Fora da zona
-              }
-            </span>
-          </header>
-          <p class="desc">{{ obj.description }}</p>
-          <dl>
-            <div>
-              <dt>Gap otimista</dt>
-              <dd>{{ obj.pointsGap ?? 0 }} pts</dd>
-            </div>
-            <div>
-              <dt>Corte / referência</dt>
-              <dd>{{ obj.cutoffPoints ?? "—" }} ({{ obj.referenceTeam || "—" }})</dd>
-            </div>
-            <div>
-              <dt>Ainda possível?</dt>
-              <dd>{{ obj.stillPossible ? "Sim" : "Não (no recorte atual)" }}</dd>
-            </div>
-          </dl>
-          <p class="tone">“{{ obj.tone }}”</p>
-        </article>
-      }
-    </div>
+      <div class="grid">
+        @for (obj of data.objectives; track obj.id) {
+          <article
+            class="obj"
+            [class.obj--ok]="obj.stillPossible"
+            [class.obj--in]="obj.inZone"
+            [class.obj--danger]="obj.inDanger"
+          >
+            <header>
+              <h3>
+                <span class="obj__emo" aria-hidden="true">{{ objectiveEmoji(obj.id) }}</span>
+                {{ obj.label }}
+              </h3>
+              <span class="pill">
+                @if (obj.inDanger) {
+                  Na zona
+                } @else if (obj.inZone) {
+                  Na zona
+                } @else {
+                  Fora da zona
+                }
+              </span>
+            </header>
+            <p class="desc">{{ obj.description }}</p>
+            <dl>
+              <div>
+                <dt>Gap otimista</dt>
+                <dd>{{ obj.pointsGap ?? 0 }} pts</dd>
+              </div>
+              <div>
+                <dt>Corte / referência</dt>
+                <dd>{{ obj.cutoffPoints ?? "—" }} ({{ obj.referenceTeam || "—" }})</dd>
+              </div>
+              <div>
+                <dt>Ainda possível?</dt>
+                <dd>{{ obj.stillPossible ? "Sim" : "Não (no recorte atual)" }}</dd>
+              </div>
+            </dl>
+            <p class="tone">“{{ obj.tone }}”</p>
+          </article>
+        }
+      </div>
+    </section>
+
+    @if (dashboard(); as dash) {
+      <app-objectives-resumo [dashboard]="dash" />
+      <app-objectives-chart [dashboard]="dash" />
+      <app-objectives-blocks-summary [dashboard]="dash" />
+
+      <section class="phases" aria-labelledby="phases-heading">
+        <header class="section-head">
+          <h2 id="phases-heading">
+            <span class="emo" aria-hidden="true">📋</span>
+            Detalhe por fase
+          </h2>
+          <p>Jogos, pontos conquistados e saldo em relação à meta de cada objetivo.</p>
+        </header>
+        @for (block of dash.blocks; track block.id) {
+          @if (block.state !== 'upcoming') {
+            <app-objectives-block-detail [block]="block" />
+          }
+        }
+      </section>
+    }
   </section>
 } @else if (snapshot() === null) {
   <section class="page">
     <h1>Objetivos</h1>
-    <p>Rode <code>python tools/compute_objectives.py</code> e depois o build de conteúdo.</p>
+    <p>Rode <code>npm run objectives</code> e depois o build de conteúdo.</p>
   </section>
 } @else {
   <p class="loading">Calculando caminhos do Glorioso…</p>

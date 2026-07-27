@@ -66,20 +66,21 @@ npm run dev
 
 No hub você escolhe a tarefa. Em **Conteúdo** cria/edita/apaga notícias, site, jogos e tabelas. O watcher regenera o JSON do site após salvar.
 
-### Atualizar tabela do Brasileirão
+### Atualizar tabelas (competições ativas)
 
-Abra **`/admin/tabelas.html`** (não fica em Site nem no JSON da tabela). Escolha a fonte e atualize:
+Abra **`/admin/tabelas.html`**. A lista de competições vem de `site.json → activeCompetitions`.
 
 | Fonte | Chave? | Nota |
 |-------|--------|------|
-| **ESPN** (padrão) | Não | Endpoint público; bom para editorial. Confira com a CBF se quiser. |
-| **API-Football** | `API_FOOTBALL_KEY` no `.env` | Plano free em [api-football.com](https://www.api-football.com/) |
-| **football-data.org** | `FOOTBALL_DATA_TOKEN` | BSA pode exigir plano pago |
+| **Sofascore** (padrão) | Não | API com TLS Chrome (`curl_cffi`); tabela ou chave mata-mata |
+| **Google** | `SERPAPI_KEY` opcional | Google Sports via SerpAPI; sem chave usa Wikipedia (resultado típico no Google BR) |
+| **ESPN** | Não | Endpoint público |
+| **API-Football** | `API_FOOTBALL_KEY` | Plano free |
+| **football-data.org** | `FOOTBALL_DATA_TOKEN` | BSA pode ser pago |
 
-Também via CLI: `npm run update:standings` (usa ESPN por padrão).
+CLI: `npm run update:standings -- --competition all-active --provider sofascore`
 
-Configuração das fontes: [`content/config/standings_sources.json`](content/config/standings_sources.json).
-
+Config: [`content/config/standings_sources.json`](content/config/standings_sources.json).
 Só o portal: `npm start` · Só o CMS proxy: `npm run cms`
 
 Build de produção:
@@ -107,16 +108,14 @@ tools/             Scripts Python + prepare-web.mjs
 
 Curadoria RSS: `python tools/curate_rss.py` cria rascunhos; revise e valide antes de publicar.
 
-## Objetivos (FogaoNET)
+## Objetivos
 
-`python tools/compute_objectives.py` gera `content/objectives/snapshot.json` com gaps para:
+`npm run objectives` gera:
 
-- Título
-- Libertadores (G6)
-- Sul-Americana
-- Evitar Z4
+- `content/objectives/snapshot.json` — gaps otimistas (cards em `/objetivos`)
+- `content/objectives/dashboard.json` — resumo, gráfico por rodada e fases
 
-Limiares configuráveis em `content/objectives/config.json`.
+Config: `content/objectives/config.json` (metas, limiares, fases). Tops editoriais: `leaders.json`. Posição por rodada: `position_by_round.json`.
 
 ## Decap CMS no GitHub Pages
 
