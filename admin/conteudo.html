@@ -6,7 +6,6 @@
     <meta name="robots" content="noindex" />
     <title>Editor de conteúdo — Portal Fogão</title>
     <link rel="stylesheet" href="./admin.css" />
-    <!-- Caminho explícito: funciona em /admin/ e em /botafogo-news/admin/ -->
     <link href="./config.yml" type="text/yaml" rel="cms-config-url" />
     <style>
       html,
@@ -16,7 +15,6 @@
         background: #f7f7f7;
       }
 
-      /* Só a barra — NÃO ocupar 100vh (empurrava o Decap para fora da tela) */
       #crm-chrome {
         position: sticky;
         top: 0;
@@ -54,9 +52,7 @@
         display: none;
       }
 
-      /* Área do Decap visível abaixo da barra */
-      #nc-root,
-      body > div:not(#crm-chrome):not([id="cms-status"]) {
+      #nc-root {
         min-height: calc(100vh - 7.5rem);
       }
     </style>
@@ -94,6 +90,7 @@
     <script>
       (function () {
         const status = document.getElementById("cms-status");
+        const chrome = document.getElementById("crm-chrome");
         const isLocal =
           location.hostname === "localhost" || location.hostname === "127.0.0.1";
 
@@ -101,6 +98,12 @@
           status.hidden = false;
           status.dataset.state = "err";
           status.innerHTML = msg;
+        }
+
+        function keepChromeOnTop() {
+          if (chrome && document.body.firstElementChild !== chrome) {
+            document.body.prepend(chrome);
+          }
         }
 
         async function boot() {
@@ -117,7 +120,6 @@
               );
             }
 
-            // Garante o link relativo (Pages com base /botafogo-news/)
             let link = document.querySelector('link[rel="cms-config-url"]');
             if (!link) {
               link = document.createElement("link");
@@ -133,17 +135,14 @@
               );
             }
 
-            CMS.registerEventListener({
-              name: "preMount",
-              handler: function () {
-                const chrome = document.getElementById("crm-chrome");
-                if (chrome) document.body.prepend(chrome);
-              },
-            });
+            // Decap só aceita: prePublish, postPublish, preUnpublish,
+            // postUnpublish, preSave, postSave — não use preMount.
+            const observer = new MutationObserver(keepChromeOnTop);
+            observer.observe(document.body, { childList: true });
 
             CMS.init();
+            keepChromeOnTop();
 
-            // local_backend só funciona com npm run dev (decap-server na 8081)
             if (isLocal) {
               status.textContent =
                 "Editor local — use npm run dev (proxy Decap na porta 8081).";
