@@ -1,0 +1,20 @@
+---
+title: "Botafogo tem interesse na contratação de zagueiro que disputou a Copa pela RD Congo - GE"
+slug: "botafogo-tem-interesse-na-contratacao-de-zagueiro-que-disputou-a-copa-pela-rd-co"
+publishedAt: "2026-07-27T14:08:10-03:00"
+status: draft
+tags:
+  - curadoria
+  - rss
+tone: fogao
+sources:
+  - "https://news.google.com/rss/articles/CBMi5wFBVV95cUxNNDd4V095Y3lZLUplT0pfNjlRbl9CaU1namFKOHhSM2JHY3VtM3JBQXNFeVJiVmNibjQ2WU5lT25iLXFEZHdncVpLczktVWtlU3VmMGJZYXlVMFh1WnkxWlJHd3lncDFLU2I5M0dFTDVSQV9UaW1TeWUwYVlVYm93bVdham4tQXYxell6bk9IRXpQdjFWV29LQjlpelpoek11MFpRb1VneFV6M1dCUWZ4Q1R2SDlFNmhpLTB3bHRrQmQyWTBCekhTSmNqek1GTmNvckVlYVRzZzdDNS1lcUprMjFsWlVrejDSAfYBQVVfeXFMTWpWR2FmbTV5M1hSeXBLbElUb1YxSDh2MUt4QVpzSlYtU2tUeWhOM3NmeVBBbDFHNlNLZ25rcXJnN3JkSUMyUlVCYzA4WVhmQklDTXJ1bUdZLXQ3Zk5WbVBLbnhyZ3ZyR3VKMDJLeXRudnJ1Y0xQNTlqZWV3NWtJMk8tSEt4QURlSmpKSXNmM2dvZ1p2M0w1ekxtdWdRdWRLT3pkSnR5eEZ2b3BYd3Q1NnZzS3kxOHB0NXQ4dFdUVkxnRmwwczlOazE0NjlvdmxyemNhSFV6QmpnOWZ1ZS1SRHdpTkdfQ3p3b1ptejRpRTZoSGZ5NnJ3?oc=5"
+summary: "Botafogo tem interesse na contratação de zagueiro que disputou a Copa pela RD Congo&nbsp;&nbsp;GE"
+---
+
+Botafogo tem interesse na contratação de zagueiro que disputou a Copa pela RD Congo&nbsp;&nbsp;GE
+
+_Rascunho importado via RSS. Reescreva no tom editorial Fogão (ver `content/EDITORIAL.md`) e altere `status` para `validated`._
+
+Fonte original: https://news.google.com/rss/articles/CBMi5wFBVV95cUxNNDd4V095Y3lZLUplT0pfNjlRbl9CaU1namFKOHhSM2JHY3VtM3JBQXNFeVJiVmNibjQ2WU5lT25iLXFEZHdncVpLczktVWtlU3VmMGJZYXlVMFh1WnkxWlJHd3lncDFLU2I5M0dFTDVSQV9UaW1TeWUwYVlVYm93bVdham4tQXYxell6bk9IRXpQdjFWV29LQjlpelpoek11MFpRb1VneFV6M1dCUWZ4Q1R2SDlFNmhpLTB3bHRrQmQyWTBCekhTSmNqek1GTmNvckVlYVRzZzdDNS1lcUprMjFsWlVrejDSAfYBQVVfeXFMTWpWR2FmbTV5M1hSeXBLbElUb1YxSDh2MUt4QVpzSlYtU2tUeWhOM3NmeVBBbDFHNlNLZ25rcXJnN3JkSUMyUlVCYzA4WVhmQklDTXJ1bUdZLXQ3Zk5WbVBLbnhyZ3ZyR3VKMDJLeXRudnJ1Y0xQNTlqZWV3NWtJMk8tSEt4QURlSmpKSXNmM2dvZ1p2M0w1ekxtdWdRdWRLT3pkSnR5eEZ2b3BYd3Q1NnZzS3kxOHB0NXQ4dFdUVkxnRmwwczlOazE0NjlvdmxyemNhSFV6QmpnOWZ1ZS1SRHdpTkdfQ3p3b1ptejRpRTZoSGZ5NnJ3?oc=5
+

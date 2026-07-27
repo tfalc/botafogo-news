@@ -1,0 +1,23 @@
+<section class="page">
+  <header class="page__header">
+    <h1>Notícias</h1>
+    <p>Apenas textos revisados e validados pela redação alvinegra.</p>
+  </header>
+
+  <div class="list">
+    @for (item of news(); track item.slug) {
+      <article class="row" [class.row--rival]="item.tone === 'rival'">
+        <a [routerLink]="['/noticias', item.slug]">
+          <div class="row__meta">
+            <span class="badge">{{ item.tone === 'fogao' ? 'Validado Fogão' : 'Leitura rival' }}</span>
+            <time>{{ item.publishedAt | date: "d MMM y · HH:mm" : undefined : "pt-BR" }}</time>
+          </div>
+          <h2>{{ item.title }}</h2>
+          <p>{{ item.summary }}</p>
+        </a>
+      </article>
+    } @empty {
+      <p>Nenhuma notícia validada ainda.</p>
+    }
+  </div>
+</section>

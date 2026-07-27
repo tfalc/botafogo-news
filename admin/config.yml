@@ -1,0 +1,94 @@
+backend:
+  name: git-gateway
+  branch: main
+  # For pure GitHub Pages without Netlify Identity, switch to:
+  # name: github
+  # repo: tfalc/botafogo-news
+  # branch: main
+  # base_url: https://api.github.com
+  # auth_endpoint: auth
+
+# Uncomment for local editing without OAuth:
+# local_backend: true
+
+media_folder: apps/web/public/uploads
+public_folder: /uploads
+
+locale: pt
+
+collections:
+  - name: news
+    label: Notícias
+    label_singular: Notícia
+    folder: content/news
+    create: true
+    slug: "{{slug}}"
+    extension: md
+    format: frontmatter
+    fields:
+      - { label: Título, name: title, widget: string }
+      - { label: Slug, name: slug, widget: string }
+      - { label: Publicado em, name: publishedAt, widget: datetime }
+      - label: Status
+        name: status
+        widget: select
+        options: [draft, validated]
+        default: draft
+      - label: Tom editorial
+        name: tone
+        widget: select
+        options:
+          - { label: Fogão (otimista), value: fogao }
+          - { label: Rival (crítico), value: rival }
+        default: fogao
+      - { label: Tags, name: tags, widget: list, required: false }
+      - { label: Fontes, name: sources, widget: list, required: false }
+      - { label: Resumo, name: summary, widget: text }
+      - { label: Corpo, name: body, widget: markdown }
+
+  - name: site
+    label: Site
+    files:
+      - name: settings
+        label: Configurações
+        file: content/site.json
+        fields:
+          - { label: Nome, name: name, widget: string }
+          - { label: Tagline, name: tagline, widget: string }
+          - { label: Time, name: team, widget: string }
+          - { label: Nome completo, name: teamFullName, widget: string }
+          - { label: Temporada, name: season, widget: number }
+          - { label: Competições ativas, name: activeCompetitions, widget: list }
+          - { label: Competição principal, name: primaryCompetition, widget: string }
+          - { label: Copo meio cheio (semana), name: copoMeioCheio, widget: text }
+
+  - name: standings
+    label: Tabelas
+    label_singular: Tabela
+    folder: content/standings
+    extension: json
+    format: json
+    create: true
+    slug: "{{id}}"
+    fields:
+      - { label: ID, name: id, widget: string }
+      - { label: Nome, name: name, widget: string }
+      - { label: Temporada, name: season, widget: number }
+      - { label: Atualizado em, name: updatedAt, widget: datetime }
+      - { label: Formato, name: format, widget: string, required: false }
+      - { label: Fase, name: stage, widget: string, required: false }
+      - label: Times
+        name: teams
+        widget: list
+        fields:
+          - { label: Posição, name: position, widget: number }
+          - { label: Nome, name: name, widget: string }
+          - { label: J, name: played, widget: number }
+          - { label: V, name: won, widget: number }
+          - { label: E, name: drawn, widget: number }
+          - { label: D, name: lost, widget: number }
+          - { label: GP, name: goalsFor, widget: number }
+          - { label: GC, name: goalsAgainst, widget: number }
+          - { label: SG, name: goalDifference, widget: number }
+          - { label: Pts, name: points, widget: number }
+          - { label: Nota, name: note, widget: string, required: false }

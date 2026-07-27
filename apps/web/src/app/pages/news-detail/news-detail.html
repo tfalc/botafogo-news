@@ -1,0 +1,29 @@
+@if (article(); as item) {
+  <article class="article">
+    <a routerLink="/noticias" class="back">← Notícias</a>
+    <header>
+      <span class="badge">{{ item.tone === 'fogao' ? 'Validado Fogão' : 'Leitura rival' }}</span>
+      <h1>{{ item.title }}</h1>
+      <time>{{ item.publishedAt | date: "d 'de' MMMM 'de' y · HH:mm" : undefined : "pt-BR" }}</time>
+    </header>
+    <div class="body" [innerHTML]="html()"></div>
+    @if (item.sources.length) {
+      <aside class="sources">
+        <h2>Fontes</h2>
+        <ul>
+          @for (src of item.sources; track src) {
+            <li><a [href]="src" target="_blank" rel="noopener noreferrer">{{ src }}</a></li>
+          }
+        </ul>
+      </aside>
+    }
+  </article>
+} @else if (article() === null) {
+  <section class="page">
+    <h1>Notícia não encontrada</h1>
+    <p>Só exibimos textos com status <code>validated</code>.</p>
+    <a routerLink="/noticias">Voltar</a>
+  </section>
+} @else {
+  <p class="loading">Carregando…</p>
+}

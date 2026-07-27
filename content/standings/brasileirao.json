@@ -1,0 +1,28 @@
+{
+  "id": "brasileirao",
+  "name": "Campeonato Brasileiro Série A",
+  "season": 2026,
+  "updatedAt": "2026-07-20T12:00:00-03:00",
+  "teams": [
+    {"position": 1, "name": "Flamengo", "played": 16, "won": 10, "drawn": 4, "lost": 2, "goalsFor": 28, "goalsAgainst": 12, "goalDifference": 16, "points": 34},
+    {"position": 2, "name": "Palmeiras", "played": 16, "won": 10, "drawn": 3, "lost": 3, "goalsFor": 26, "goalsAgainst": 14, "goalDifference": 12, "points": 33},
+    {"position": 3, "name": "Botafogo", "played": 16, "won": 9, "drawn": 4, "lost": 3, "goalsFor": 24, "goalsAgainst": 13, "goalDifference": 11, "points": 31},
+    {"position": 4, "name": "Cruzeiro", "played": 16, "won": 8, "drawn": 5, "lost": 3, "goalsFor": 22, "goalsAgainst": 15, "goalDifference": 7, "points": 29},
+    {"position": 5, "name": "São Paulo", "played": 16, "won": 8, "drawn": 4, "lost": 4, "goalsFor": 21, "goalsAgainst": 16, "goalDifference": 5, "points": 28},
+    {"position": 6, "name": "Bahia", "played": 16, "won": 7, "drawn": 5, "lost": 4, "goalsFor": 20, "goalsAgainst": 17, "goalDifference": 3, "points": 26},
+    {"position": 7, "name": "Internacional", "played": 16, "won": 7, "drawn": 4, "lost": 5, "goalsFor": 19, "goalsAgainst": 18, "goalDifference": 1, "points": 25},
+    {"position": 8, "name": "Atlético-MG", "played": 16, "won": 6, "drawn": 6, "lost": 4, "goalsFor": 18, "goalsAgainst": 16, "goalDifference": 2, "points": 24},
+    {"position": 9, "name": "Fluminense", "played": 16, "won": 6, "drawn": 5, "lost": 5, "goalsFor": 17, "goalsAgainst": 17, "goalDifference": 0, "points": 23},
+    {"position": 10, "name": "Corinthians", "played": 16, "won": 5, "drawn": 7, "lost": 4, "goalsFor": 16, "goalsAgainst": 15, "goalDifference": 1, "points": 22},
+    {"position": 11, "name": "Grêmio", "played": 16, "won": 5, "drawn": 6, "lost": 5, "goalsFor": 15, "goalsAgainst": 16, "goalDifference": -1, "points": 21},
+    {"position": 12, "name": "Vasco", "played": 16, "won": 5, "drawn": 5, "lost": 6, "goalsFor": 14, "goalsAgainst": 18, "goalDifference": -4, "points": 20},
+    {"position": 13, "name": "Santos", "played": 16, "won": 4, "drawn": 6, "lost": 6, "goalsFor": 13, "goalsAgainst": 19, "goalDifference": -6, "points": 18},
+    {"position": 14, "name": "Fortaleza", "played": 16, "won": 4, "drawn": 5, "lost": 7, "goalsFor": 14, "goalsAgainst": 20, "goalDifference": -6, "points": 17},
+    {"position": 15, "name": "Bragantino", "played": 16, "won": 4, "drawn": 4, "lost": 8, "goalsFor": 12, "goalsAgainst": 21, "goalDifference": -9, "points": 16},
+    {"position": 16, "name": "Cuiabá", "played": 16, "won": 3, "drawn": 6, "lost": 7, "goalsFor": 11, "goalsAgainst": 20, "goalDifference": -9, "points": 15},
+    {"position": 17, "name": "Vitória", "played": 16, "won": 3, "drawn": 5, "lost": 8, "goalsFor": 10, "goalsAgainst": 22, "goalDifference": -12, "points": 14},
+    {"position": 18, "name": "Juventude", "played": 16, "won": 3, "drawn": 4, "lost": 9, "goalsFor": 9, "goalsAgainst": 23, "goalDifference": -14, "points": 13},
+    {"position": 19, "name": "Athletico-PR", "played": 16, "won": 2, "drawn": 5, "lost": 9, "goalsFor": 10, "goalsAgainst": 24, "goalDifference": -14, "points": 11},
+    {"position": 20, "name": "Criciúma", "played": 16, "won": 2, "drawn": 3, "lost": 11, "goalsFor": 8, "goalsAgainst": 26, "goalDifference": -18, "points": 9}
+  ]
+}

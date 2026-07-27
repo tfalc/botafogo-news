@@ -1,0 +1,60 @@
+{
+  "competition": "brasileirao",
+  "season": 2026,
+  "matches": [
+    {
+      "id": "bra-17-bot-sao",
+      "round": 17,
+      "date": "2026-07-27T16:00:00-03:00",
+      "home": "Botafogo",
+      "away": "São Paulo",
+      "status": "scheduled",
+      "venue": "Nilton Santos"
+    },
+    {
+      "id": "bra-18-flu-bot",
+      "round": 18,
+      "date": "2026-08-03T16:00:00-03:00",
+      "home": "Fluminense",
+      "away": "Botafogo",
+      "status": "scheduled",
+      "venue": "Maracanã"
+    },
+    {
+      "id": "bra-19-bot-bah",
+      "round": 19,
+      "date": "2026-08-10T18:30:00-03:00",
+      "home": "Botafogo",
+      "away": "Bahia",
+      "status": "scheduled",
+      "venue": "Nilton Santos"
+    },
+    {
+      "id": "bra-20-vas-bot",
+      "round": 20,
+      "date": "2026-08-17T16:00:00-03:00",
+      "home": "Vasco",
+      "away": "Botafogo",
+      "status": "scheduled",
+      "venue": "São Januário"
+    },
+    {
+      "id": "bra-21-bot-pal",
+      "round": 21,
+      "date": "2026-08-24T16:00:00-03:00",
+      "home": "Botafogo",
+      "away": "Palmeiras",
+      "status": "scheduled",
+      "venue": "Nilton Santos"
+    },
+    {
+      "id": "bra-22-fla-bot",
+      "round": 22,
+      "date": "2026-08-31T16:00:00-03:00",
+      "home": "Flamengo",
+      "away": "Botafogo",
+      "status": "scheduled",
+      "venue": "Maracanã"
+    }
+  ]
+}

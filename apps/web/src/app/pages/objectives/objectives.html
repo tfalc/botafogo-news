@@ -1,0 +1,81 @@
+@if (snapshot(); as data) {
+  <section class="page">
+    <header class="page__header">
+      <h1>Objetivos da temporada</h1>
+      <p>
+        Estilo planilha FogaoNET: quanto falta (no cenário otimista) para título, Libertadores,
+        Sul-Americana e para ficar longe da Z4.
+      </p>
+    </header>
+
+    <div class="summary">
+      <div>
+        <span class="label">Posição</span>
+        <strong>{{ data.summary.position }}º</strong>
+      </div>
+      <div>
+        <span class="label">Pontos</span>
+        <strong>{{ data.summary.points }}</strong>
+      </div>
+      <div>
+        <span class="label">Jogos restantes</span>
+        <strong>{{ data.summary.remainingMatches }}</strong>
+      </div>
+      <div>
+        <span class="label">Teto de pontos</span>
+        <strong>{{ data.summary.maxPoints }}</strong>
+      </div>
+    </div>
+
+    <p class="generated">
+      Snapshot gerado em {{ data.generatedAt | date: "d MMM y HH:mm" : undefined : "pt-BR" }}
+    </p>
+
+    <div class="grid">
+      @for (obj of data.objectives; track obj.id) {
+        <article
+          class="obj"
+          [class.obj--ok]="obj.stillPossible"
+          [class.obj--in]="obj.inZone"
+          [class.obj--danger]="obj.inDanger"
+        >
+          <header>
+            <h2>{{ obj.label }}</h2>
+            <span class="pill">
+              @if (obj.inDanger) {
+                Na zona
+              } @else if (obj.inZone) {
+                Na zona
+              } @else {
+                Fora da zona
+              }
+            </span>
+          </header>
+          <p class="desc">{{ obj.description }}</p>
+          <dl>
+            <div>
+              <dt>Gap otimista</dt>
+              <dd>{{ obj.pointsGap ?? 0 }} pts</dd>
+            </div>
+            <div>
+              <dt>Corte / referência</dt>
+              <dd>{{ obj.cutoffPoints ?? "—" }} ({{ obj.referenceTeam || "—" }})</dd>
+            </div>
+            <div>
+              <dt>Ainda possível?</dt>
+              <dd>{{ obj.stillPossible ? "Sim" : "Não (no recorte atual)" }}</dd>
+            </div>
+          </dl>
+          <p class="tone">“{{ obj.tone }}”</p>
+        </article>
+      }
+    </div>
+  </section>
+} @else if (snapshot() === null) {
+  <section class="page">
+    <h1>Objetivos</h1>
+    <p>Rode <code>python tools/compute_objectives.py</code> e depois o build de conteúdo.</p>
+  </section>
+} @else {
+  <p class="loading">Calculando caminhos do Glorioso…</p>
+}

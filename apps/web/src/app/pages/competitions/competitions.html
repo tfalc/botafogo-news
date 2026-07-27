@@ -1,0 +1,59 @@
+@if (vm(); as data) {
+  <section class="page">
+    <header class="page__header">
+      <h1>Outras competições</h1>
+      <p>
+        Além do {{ data.site.primaryCompetition }}, o Glorioso também disputa estas frentes em
+        {{ data.site.season }}.
+      </p>
+    </header>
+
+    @for (table of data.tables; track table.id) {
+      <article class="comp">
+        <div class="comp__head">
+          <h2>{{ table.name }}</h2>
+          @if (table.stage) {
+            <span class="stage">{{ table.stage }}</span>
+          }
+        </div>
+        <p class="updated">
+          Atualizado {{ table.updatedAt | date: "d MMM y" : undefined : "pt-BR" }}
+        </p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Time</th>
+                <th>P</th>
+                <th>J</th>
+                <th>V</th>
+                <th>E</th>
+                <th>D</th>
+                <th>Nota</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (team of table.teams; track team.name) {
+                <tr [class.is-fogao]="team.name === data.site.team">
+                  <td>{{ team.position }}</td>
+                  <td class="team">{{ team.name }}</td>
+                  <td class="pts">{{ team.points }}</td>
+                  <td>{{ team.played }}</td>
+                  <td>{{ team.won }}</td>
+                  <td>{{ team.drawn }}</td>
+                  <td>{{ team.lost }}</td>
+                  <td>{{ team.note || "—" }}</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </article>
+    } @empty {
+      <p>Nenhuma competição adicional cadastrada em <code>site.json</code>.</p>
+    }
+  </section>
+} @else {
+  <p class="loading">Carregando competições…</p>
+}

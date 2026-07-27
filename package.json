@@ -1,0 +1,12 @@
+{
+  "name": "botafogo-portal",
+  "private": true,
+  "scripts": {
+    "prepare:content": "node tools/prepare-web.mjs",
+    "validate": "python tools/validate_content.py",
+    "objectives": "python tools/compute_objectives.py",
+    "curate": "python tools/curate_rss.py",
+    "start": "npm --prefix apps/web start",
+    "build": "npm --prefix apps/web run build -- --base-href=/botafogo-news/"
+  }
+}

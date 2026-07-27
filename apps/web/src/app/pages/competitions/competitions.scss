@@ -1,0 +1,90 @@
+.page {
+  padding: clamp(2rem, 5vw, 4rem) clamp(1rem, 4vw, 3rem);
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.page__header h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  margin: 0 0 0.35rem;
+}
+
+.page__header p {
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0 0 2rem;
+}
+
+.comp {
+  margin-bottom: 2.5rem;
+}
+
+.comp__head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: baseline;
+}
+
+.comp__head h2 {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  margin: 0;
+}
+
+.stage {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  padding: 0.2rem 0.5rem;
+}
+
+.updated {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.85rem;
+}
+
+.table-wrap {
+  overflow-x: auto;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 520px;
+  font-variant-numeric: tabular-nums;
+}
+
+th,
+td {
+  padding: 0.6rem 0.5rem;
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+th {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+td.team {
+  text-align: left;
+  font-weight: 600;
+}
+
+td.pts {
+  font-weight: 800;
+}
+
+tr.is-fogao {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.loading {
+  padding: 4rem;
+  text-align: center;
+}

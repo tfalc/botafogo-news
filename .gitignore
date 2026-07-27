@@ -1,0 +1,16 @@
+node_modules/
+dist/
+.angular/
+apps/web/public/content/
+apps/web/public/admin/
+apps/web/public/uploads/
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
+.DS_Store
+*.log
+.idea/
+.vscode/
+!apps/web/.vscode/

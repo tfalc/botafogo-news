@@ -1,0 +1,22 @@
+<header class="topbar">
+  <a routerLink="/" class="brand">
+    <span class="brand__mark" aria-hidden="true"></span>
+    <span class="brand__text">
+      <strong>Portal Fogão</strong>
+      <small>Botafogo de Futebol e Regatas</small>
+    </span>
+  </a>
+  <nav class="nav" aria-label="Principal">
+    <a routerLink="/" routerLinkActive="is-active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+    <a routerLink="/noticias" routerLinkActive="is-active">Notícias</a>
+    <a routerLink="/tabela" routerLinkActive="is-active">Tabela</a>
+    <a routerLink="/competicoes" routerLinkActive="is-active">Competições</a>
+    <a routerLink="/objetivos" routerLinkActive="is-active">Objetivos</a>
+  </nav>
+</header>
+<main class="main">
+  <router-outlet />
+</main>
+<footer class="footer">
+  <p>Feito pela e para a torcida alvinegra. Tom editorial: copo sempre meio cheio.</p>
+</footer>

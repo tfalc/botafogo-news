@@ -1,0 +1,12 @@
+{
+  "id": "copa-do-brasil",
+  "name": "Copa do Brasil",
+  "season": 2026,
+  "format": "knockout",
+  "updatedAt": "2026-07-15T12:00:00-03:00",
+  "stage": "Oitavas de final",
+  "teams": [
+    {"position": 1, "name": "Botafogo", "played": 4, "won": 3, "drawn": 1, "lost": 0, "goalsFor": 7, "goalsAgainst": 2, "goalDifference": 5, "points": 10, "note": "Classificado"},
+    {"position": 2, "name": "Athletico-PR", "played": 4, "won": 2, "drawn": 1, "lost": 1, "goalsFor": 5, "goalsAgainst": 4, "goalDifference": 1, "points": 7, "note": "Eliminado"}
+  ]
+}

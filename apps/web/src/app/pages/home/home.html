@@ -1,0 +1,55 @@
+@if (vm(); as data) {
+  <section class="hero">
+    <div class="hero__veil"></div>
+    <div class="hero__content">
+      <p class="hero__eyebrow">{{ data.site.teamFullName }}</p>
+      <h1 class="hero__title">{{ data.site.name }}</h1>
+      <p class="hero__tagline">{{ data.site.tagline }}</p>
+      <div class="hero__actions">
+        <a routerLink="/noticias" class="btn btn--primary">Ler notícias</a>
+        <a routerLink="/objetivos" class="btn btn--ghost">Ver objetivos</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section copo">
+    <h2>Copo meio cheio</h2>
+    <p>{{ data.site.copoMeioCheio }}</p>
+  </section>
+
+  @if (data.next) {
+    <section class="section next">
+      <h2>Próximo jogo</h2>
+      <div class="next__card">
+        <p class="next__match">{{ data.next.home }} × {{ data.next.away }}</p>
+        <p class="next__meta">
+          {{ data.next.date | date: "EEEE, d MMM y · HH:mm" : undefined : "pt-BR" }}
+          @if (data.next.venue) {
+            <span>· {{ data.next.venue }}</span>
+          }
+        </p>
+      </div>
+    </section>
+  }
+
+  <section class="section news">
+    <div class="section__head">
+      <h2>Notícias validadas</h2>
+      <a routerLink="/noticias">Ver todas</a>
+    </div>
+    <div class="news-grid">
+      @for (item of data.news; track item.slug) {
+        <article class="news-item" [class.news-item--rival]="item.tone === 'rival'">
+          <a [routerLink]="['/noticias', item.slug]">
+            <span class="badge">{{ item.tone === 'fogao' ? 'Fogão' : 'Rival' }}</span>
+            <h3>{{ item.title }}</h3>
+            <p>{{ item.summary }}</p>
+            <time>{{ item.publishedAt | date: "d MMM y" : undefined : "pt-BR" }}</time>
+          </a>
+        </article>
+      }
+    </div>
+  </section>
+} @else {
+  <p class="loading">Carregando o Glorioso…</p>
+}
