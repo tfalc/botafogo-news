@@ -9,14 +9,13 @@ O repositório usa **`main`** como branch de produção (equivalente ao “maste
 3. Marque:
    - **Restrict deletions**
    - **Require a pull request before merging**
-   - **Require approvals:** `1`
-   - **Require review from Code Owners** (usa [`.github/CODEOWNERS`](CODEOWNERS))
+   - **Require approvals:** `1` (com segundo revisor; em conta solo o dono ainda pode fazer merge se *Do not allow bypassing* estiver off)
+   - **Require review from Code Owners** (opcional — usa [`.github/CODEOWNERS`](CODEOWNERS))
    - **Require status checks to pass:** `validate-and-build`
    - **Block force pushes**
-   - **Do not allow bypassing the above settings** (recomendado)
 4. Salve o ruleset.
 
-Com isso, push direto em `main` fica bloqueado; só entra código via PR aprovado.
+Já foi aplicada proteção clássica em `main` via API (PR + CI; force push bloqueado). Para modo estrito com segundo revisor, ative *Include administrators* / *Do not allow bypassing* nas Settings.
 
 ## Fluxo do dia a dia
 
