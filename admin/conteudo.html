@@ -6,37 +6,63 @@
     <meta name="robots" content="noindex" />
     <title>Editor de conteúdo — Portal Fogão</title>
     <link rel="stylesheet" href="./admin.css" />
+    <!-- Caminho explícito: funciona em /admin/ e em /botafogo-news/admin/ -->
+    <link href="./config.yml" type="text/yaml" rel="cms-config-url" />
     <style>
-      .crm-cms-wrap {
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
+      html,
+      body {
+        margin: 0;
+        min-height: 100%;
         background: #f7f7f7;
       }
-      .crm-cms-wrap > .crm-top {
+
+      /* Só a barra — NÃO ocupar 100vh (empurrava o Decap para fora da tela) */
+      #crm-chrome {
         position: sticky;
         top: 0;
         z-index: 100000;
       }
+
       .crm-cms-banner {
-        padding: 0.65rem var(--space, 1.5rem);
+        padding: 0.65rem 1.5rem;
         background: #fff;
         border-bottom: 1px solid rgba(10, 10, 10, 0.12);
         font-size: 0.9rem;
         color: rgba(10, 10, 10, 0.64);
       }
+
       .crm-cms-banner a {
         font-weight: 700;
         color: #0a0a0a;
       }
-      body {
+
+      #cms-status {
         margin: 0;
-        background: #f7f7f7;
+        padding: 1.25rem 1.5rem;
+        font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+        color: rgba(10, 10, 10, 0.7);
+        background: #f0f0f0;
+        border-bottom: 1px solid rgba(10, 10, 10, 0.08);
+      }
+
+      #cms-status[data-state="err"] {
+        color: #9b1c1c;
+        background: rgba(155, 28, 28, 0.08);
+      }
+
+      #cms-status[hidden] {
+        display: none;
+      }
+
+      /* Área do Decap visível abaixo da barra */
+      #nc-root,
+      body > div:not(#crm-chrome):not([id="cms-status"]) {
+        min-height: calc(100vh - 7.5rem);
       }
     </style>
   </head>
   <body>
-    <div class="crm-cms-wrap" id="crm-chrome">
+    <div id="crm-chrome">
       <header class="crm-top">
         <a class="crm-brand" href="./index.html">
           <span class="crm-brand__mark" aria-hidden="true"></span>
@@ -59,15 +85,88 @@
       </div>
     </div>
 
+    <p id="cms-status" role="status">Carregando editor Decap…</p>
+
+    <script>
+      window.CMS_MANUAL_INIT = true;
+    </script>
     <script src="https://unpkg.com/decap-cms@^3.1.2/dist/decap-cms.js"></script>
     <script>
-      CMS.registerEventListener({
-        name: 'preMount',
-        handler: () => {
-          const chrome = document.getElementById('crm-chrome');
-          if (chrome) document.body.prepend(chrome);
-        },
-      });
+      (function () {
+        const status = document.getElementById("cms-status");
+        const isLocal =
+          location.hostname === "localhost" || location.hostname === "127.0.0.1";
+
+        function showError(msg) {
+          status.hidden = false;
+          status.dataset.state = "err";
+          status.innerHTML = msg;
+        }
+
+        async function boot() {
+          try {
+            const configUrl = new URL("./config.yml", window.location.href).href;
+            const res = await fetch(configUrl, { cache: "no-store" });
+            if (!res.ok) {
+              throw new Error(
+                "Não achei <code>config.yml</code> em " +
+                  configUrl +
+                  " (HTTP " +
+                  res.status +
+                  "). Rode <code>npm run prepare:content</code> ou <code>npm run dev</code>.",
+              );
+            }
+
+            // Garante o link relativo (Pages com base /botafogo-news/)
+            let link = document.querySelector('link[rel="cms-config-url"]');
+            if (!link) {
+              link = document.createElement("link");
+              link.rel = "cms-config-url";
+              link.type = "text/yaml";
+              document.head.appendChild(link);
+            }
+            link.href = configUrl;
+
+            if (typeof CMS === "undefined") {
+              throw new Error(
+                "Falha ao carregar o script do Decap (unpkg). Verifique a rede/adblock.",
+              );
+            }
+
+            CMS.registerEventListener({
+              name: "preMount",
+              handler: function () {
+                const chrome = document.getElementById("crm-chrome");
+                if (chrome) document.body.prepend(chrome);
+              },
+            });
+
+            CMS.init();
+
+            // local_backend só funciona com npm run dev (decap-server na 8081)
+            if (isLocal) {
+              status.textContent =
+                "Editor local — use npm run dev (proxy Decap na porta 8081).";
+              setTimeout(function () {
+                status.hidden = true;
+              }, 4000);
+            } else {
+              status.innerHTML =
+                "Ambiente publicado: o Decap pede login GitHub (OAuth). " +
+                "Para editar sem OAuth, use <code>npm run dev</code> em " +
+                "<code>http://localhost:4200/admin/</code>.";
+            }
+          } catch (err) {
+            showError(
+              (err && err.message) ||
+                "Erro ao iniciar o editor. Abra o console (F12) para detalhes.",
+            );
+            console.error(err);
+          }
+        }
+
+        boot();
+      })();
     </script>
   </body>
 </html>

@@ -1,22 +1,22 @@
-name: Deploy Portal Fogão
+name: CI Portal Fogão
 
-# Deploy only on main — environment github-pages never runs on PRs.
+# CI only — no github-pages environment (avoids action_required em PRs).
 on:
   push:
+    branches: [main]
+  pull_request:
     branches: [main]
   workflow_dispatch:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
-  group: pages
+  group: ci-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
 jobs:
-  build:
+  validate-and-build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -50,19 +50,3 @@ jobs:
           npm ci
           npm run build -- --base-href=/${{ github.event.repository.name }}/
           cp dist/web/browser/index.html dist/web/browser/404.html
-
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: apps/web/dist/web/browser
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4

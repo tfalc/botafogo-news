@@ -16,11 +16,26 @@ Não é preciso (nem possível) se autoaprovar.
 
 ## Proteção ativa em `main`
 
-- Status check obrigatório: `validate-and-build`
+- Status check obrigatório: `validate-and-build` (workflow **CI Portal Fogão**)
 - Force push / delete de `main` bloqueados
 - **Sem** required approving reviews (modo solo)
 
 Ajuste em **Settings → Branches → Branch protection rules**.
+
+## Permissão obrigatória do Actions (criar PR)
+
+Se o job **Abrir PR para main** falhar com:
+
+`GitHub Actions is not permitted to create or approve pull requests`
+
+ative:
+
+1. **Settings → Actions → General → Workflow permissions**
+2. **Read and write permissions**
+3. Marque **Allow GitHub Actions to create and approve pull requests**
+4. Save
+
+Sem esse checkbox, o `GITHUB_TOKEN` não consegue abrir PR.
 
 ## Fluxo do dia a dia
 
