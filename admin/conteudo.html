@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Editor de conteúdo — Portal Fogão</title>
+    <link rel="stylesheet" href="./admin.css" />
+    <style>
+      .crm-cms-wrap {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        background: #f7f7f7;
+      }
+      .crm-cms-wrap > .crm-top {
+        position: sticky;
+        top: 0;
+        z-index: 100000;
+      }
+      .crm-cms-banner {
+        padding: 0.65rem var(--space, 1.5rem);
+        background: #fff;
+        border-bottom: 1px solid rgba(10, 10, 10, 0.12);
+        font-size: 0.9rem;
+        color: rgba(10, 10, 10, 0.64);
+      }
+      .crm-cms-banner a {
+        font-weight: 700;
+        color: #0a0a0a;
+      }
+      body {
+        margin: 0;
+        background: #f7f7f7;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="crm-cms-wrap" id="crm-chrome">
+      <header class="crm-top">
+        <a class="crm-brand" href="./index.html">
+          <span class="crm-brand__mark" aria-hidden="true"></span>
+          <span class="crm-brand__text">
+            <strong>Portal Fogão</strong>
+            <small>Editor de conteúdo</small>
+          </span>
+        </a>
+        <nav class="crm-nav" aria-label="Principal">
+          <a href="./index.html">Início</a>
+          <a href="./conteudo.html" aria-current="page">Conteúdo</a>
+          <a href="./tabelas.html">Tabelas</a>
+          <a href="/" target="_blank" rel="noopener">Ver site</a>
+        </nav>
+      </header>
+      <div class="crm-cms-banner">
+        Para atualizar a classificação do Brasileirão pela fonte de dados, use
+        <a href="./tabelas.html">Atualizar tabelas</a>
+        — não a coleção Site.
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/decap-cms@^3.1.2/dist/decap-cms.js"></script>
+    <script>
+      CMS.registerEventListener({
+        name: 'preMount',
+        handler: () => {
+          const chrome = document.getElementById('crm-chrome');
+          if (chrome) document.body.prepend(chrome);
+        },
+      });
+    </script>
+  </body>
+</html>

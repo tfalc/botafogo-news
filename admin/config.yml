@@ -1,20 +1,22 @@
-backend:
-  name: git-gateway
-  branch: main
-  # For pure GitHub Pages without Netlify Identity, switch to:
-  # name: github
-  # repo: tfalc/botafogo-news
-  # branch: main
-  # base_url: https://api.github.com
-  # auth_endpoint: auth
+# Local: Decap usa o proxy (decap-server) — sem login.
+# Em produção (GitHub Pages): backend GitHub (OAuth) quando configurar.
+local_backend: true
 
-# Uncomment for local editing without OAuth:
-# local_backend: true
+backend:
+  name: github
+  repo: tfalc/botafogo-news
+  branch: main
+
+site_url: http://localhost:4200
+display_url: http://localhost:4200
 
 media_folder: apps/web/public/uploads
 public_folder: /uploads
 
 locale: pt
+
+editor:
+  preview: true
 
 collections:
   - name: news
@@ -22,17 +24,24 @@ collections:
     label_singular: Notícia
     folder: content/news
     create: true
+    delete: true
     slug: "{{slug}}"
     extension: md
     format: frontmatter
+    sortable_fields: ["publishedAt", "title", "status"]
+    view_filters:
+      - { label: Rascunhos, field: status, pattern: draft }
+      - { label: Validadas, field: status, pattern: validated }
     fields:
       - { label: Título, name: title, widget: string }
-      - { label: Slug, name: slug, widget: string }
+      - { label: Slug, name: slug, widget: string, hint: "URL amigável, ex. glorioso-vence-em-casa" }
       - { label: Publicado em, name: publishedAt, widget: datetime }
       - label: Status
         name: status
         widget: select
-        options: [draft, validated]
+        options:
+          - { label: Rascunho (não aparece no site), value: draft }
+          - { label: Validada (publicada), value: validated }
         default: draft
       - label: Tom editorial
         name: tone
@@ -60,7 +69,7 @@ collections:
           - { label: Temporada, name: season, widget: number }
           - { label: Competições ativas, name: activeCompetitions, widget: list }
           - { label: Competição principal, name: primaryCompetition, widget: string }
-          - { label: Copo meio cheio (semana), name: copoMeioCheio, widget: text }
+          - { label: Destaque da semana, name: destaqueSemanal, widget: text }
 
   - name: standings
     label: Tabelas
@@ -69,9 +78,11 @@ collections:
     extension: json
     format: json
     create: true
+    delete: true
     slug: "{{id}}"
+    identifier_field: id
     fields:
-      - { label: ID, name: id, widget: string }
+      - { label: ID, name: id, widget: string, hint: "ex. brasileirao" }
       - { label: Nome, name: name, widget: string }
       - { label: Temporada, name: season, widget: number }
       - { label: Atualizado em, name: updatedAt, widget: datetime }
@@ -80,6 +91,7 @@ collections:
       - label: Times
         name: teams
         widget: list
+        summary: "{{position}}. {{name}} — {{points}} pts"
         fields:
           - { label: Posição, name: position, widget: number }
           - { label: Nome, name: name, widget: string }
@@ -92,3 +104,35 @@ collections:
           - { label: SG, name: goalDifference, widget: number }
           - { label: Pts, name: points, widget: number }
           - { label: Nota, name: note, widget: string, required: false }
+
+  - name: fixtures
+    label: Jogos
+    label_singular: Calendário
+    folder: content/fixtures
+    extension: json
+    format: json
+    create: true
+    delete: true
+    slug: "{{competition}}"
+    identifier_field: competition
+    fields:
+      - { label: Competição (id), name: competition, widget: string }
+      - { label: Temporada, name: season, widget: number }
+      - label: Partidas
+        name: matches
+        widget: list
+        summary: "{{home}} x {{away}}"
+        fields:
+          - { label: ID, name: id, widget: string }
+          - { label: Rodada, name: round, widget: number, required: false }
+          - { label: Data, name: date, widget: datetime }
+          - { label: Mandante, name: home, widget: string }
+          - { label: Visitante, name: away, widget: string }
+          - label: Status
+            name: status
+            widget: select
+            options: [scheduled, played, postponed]
+            default: scheduled
+          - { label: Local, name: venue, widget: string, required: false }
+          - { label: Gols mandante, name: homeScore, widget: number, required: false }
+          - { label: Gols visitante, name: awayScore, widget: number, required: false }

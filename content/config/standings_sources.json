@@ -1,0 +1,64 @@
+{
+  "defaultProvider": "espn",
+  "competitions": {
+    "brasileirao": {
+      "id": "brasileirao",
+      "name": "Campeonato Brasileiro Série A",
+      "seasonFromSite": true,
+      "providers": {
+        "espn": {
+          "enabled": true,
+          "leaguePath": "bra.1",
+          "notes": "Endpoint público da ESPN (não oficial). Sem API key. Bom para uso editorial local; conferir com CBF quando possível."
+        },
+        "api-football": {
+          "enabled": true,
+          "leagueId": 71,
+          "envKey": "API_FOOTBALL_KEY",
+          "notes": "API-Sports / API-Football — plano free com chave. https://www.api-football.com/"
+        },
+        "football-data": {
+          "enabled": true,
+          "competitionCode": "BSA",
+          "envKey": "FOOTBALL_DATA_TOKEN",
+          "notes": "football-data.org — BSA pode exigir plano pago; use se sua conta liberar."
+        }
+      },
+      "nameAliases": {
+        "SE Palmeiras": "Palmeiras",
+        "Sociedade Esportiva Palmeiras": "Palmeiras",
+        "CR Flamengo": "Flamengo",
+        "Clube de Regatas do Flamengo": "Flamengo",
+        "Botafogo FR": "Botafogo",
+        "Botafogo RJ": "Botafogo",
+        "Botafogo de Futebol e Regatas": "Botafogo",
+        "Fluminense FC": "Fluminense",
+        "CR Vasco da Gama": "Vasco",
+        "Club de Regatas Vasco da Gama": "Vasco",
+        "SC Corinthians Paulista": "Corinthians",
+        "São Paulo FC": "São Paulo",
+        "Santos FC": "Santos",
+        "Grêmio FBPA": "Grêmio",
+        "Sport Club Internacional": "Internacional",
+        "Cruzeiro EC": "Cruzeiro",
+        "Clube Atlético Mineiro": "Atlético-MG",
+        "Atlético Mineiro": "Atlético-MG",
+        "Club Athletico Paranaense": "Athletico-PR",
+        "Athletico Paranaense": "Athletico-PR",
+        "Red Bull Bragantino": "Bragantino",
+        "RB Bragantino": "Bragantino",
+        "EC Bahia": "Bahia",
+        "Esporte Clube Bahia": "Bahia",
+        "Fortaleza EC": "Fortaleza",
+        "EC Vitória": "Vitória",
+        "Esporte Clube Vitória": "Vitória",
+        "EC Juventude": "Juventude",
+        "Criciúma EC": "Criciúma",
+        "Cuiabá EC": "Cuiabá",
+        "Mirassol FC": "Mirassol",
+        "Sport Recife": "Sport",
+        "Sport Club do Recife": "Sport"
+      }
+    }
+  }
+}

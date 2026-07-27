@@ -4,22 +4,81 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex" />
-    <title>Admin — Portal Fogão</title>
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <title>CRM — Portal Fogão</title>
+    <link rel="stylesheet" href="./admin.css" />
   </head>
   <body>
-    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
-    <script>
-      // Prefer GitHub backend; for local preview use `npx decap-server` + local_backend.
-      if (window.netlifyIdentity) {
-        window.netlifyIdentity.on('init', (user) => {
-          if (!user) {
-            window.netlifyIdentity.on('login', () => {
-              document.location.href = '/admin/';
-            });
-          }
-        });
-      }
-    </script>
+    <div class="crm-shell">
+      <header class="crm-top">
+        <a class="crm-brand" href="./index.html">
+          <span class="crm-brand__mark" aria-hidden="true"></span>
+          <span class="crm-brand__text">
+            <strong>Portal Fogão</strong>
+            <small>Painel editorial</small>
+          </span>
+        </a>
+        <nav class="crm-nav" aria-label="Principal">
+          <a href="./index.html" aria-current="page">Início</a>
+          <a href="./conteudo.html">Conteúdo</a>
+          <a href="./tabelas.html">Tabelas</a>
+          <a href="/" target="_blank" rel="noopener">Ver site</a>
+        </nav>
+      </header>
+
+      <main class="crm-main">
+        <section class="crm-hero" aria-labelledby="crm-title">
+          <p class="crm-kicker">CRM local</p>
+          <h1 id="crm-title">O que você quer fazer?</h1>
+          <p>
+            Três caminhos claros. Sem painéis flutuantes: conteúdo no editor,
+            classificação numa tela só de tabelas.
+          </p>
+        </section>
+
+        <ol class="crm-steps" aria-label="Fluxo editorial">
+          <li>
+            <strong>1 · Editar</strong>
+            <span>Notícia, site ou jogos no editor Decap.</span>
+          </li>
+          <li>
+            <strong>2 · Validar</strong>
+            <span>Status <em>validated</em> para aparecer no portal.</span>
+          </li>
+          <li>
+            <strong>3 · Publicar</strong>
+            <span>Commit + push em <code>main</code> → Pages.</span>
+          </li>
+        </ol>
+
+        <div class="crm-grid">
+          <a class="crm-card crm-card--primary" href="./conteudo.html">
+            <span class="crm-card__eyebrow">Principal</span>
+            <h2>Editar conteúdo</h2>
+            <p>Notícias, destaque da semana, jogos e tabelas em modo visual.</p>
+            <span class="crm-card__cta">Abrir editor →</span>
+          </a>
+          <a class="crm-card" href="./tabelas.html">
+            <span class="crm-card__eyebrow">Dados ao vivo</span>
+            <h2>Atualizar Brasileirão</h2>
+            <p>Escolha a fonte (ESPN, API-Football…) e grave a classificação no projeto.</p>
+            <span class="crm-card__cta">Escolher fonte →</span>
+          </a>
+          <a class="crm-card" href="./conteudo.html#/collections/news">
+            <span class="crm-card__eyebrow">Publicação</span>
+            <h2>Publicar notícia</h2>
+            <p>Revise rascunhos. Só entram no site com status validated.</p>
+            <span class="crm-card__cta">Ir para notícias →</span>
+          </a>
+        </div>
+
+        <aside class="crm-aside">
+          <strong>Antes de usar:</strong> rode <code>npm run dev</code> na raiz
+          (portal + Decap + tools). Tabelas precisam do serviço na porta
+          <code>8090</code>.
+        </aside>
+      </main>
+
+      <footer class="crm-footer">Portal Fogão — CRM editorial</footer>
+    </div>
   </body>
 </html>

@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Atualizar tabelas — Portal Fogão</title>
+    <link rel="stylesheet" href="./admin.css" />
+  </head>
+  <body>
+    <div class="crm-shell">
+      <header class="crm-top">
+        <a class="crm-brand" href="./index.html">
+          <span class="crm-brand__mark" aria-hidden="true"></span>
+          <span class="crm-brand__text">
+            <strong>Portal Fogão</strong>
+            <small>Tabelas</small>
+          </span>
+        </a>
+        <nav class="crm-nav" aria-label="Principal">
+          <a href="./index.html">Início</a>
+          <a href="./conteudo.html">Conteúdo</a>
+          <a href="./tabelas.html" aria-current="page">Tabelas</a>
+          <a href="/" target="_blank" rel="noopener">Ver site</a>
+        </nav>
+      </header>
+
+      <main class="crm-main">
+        <section class="crm-panel" aria-labelledby="tabelas-title">
+          <p class="crm-kicker">Classificação</p>
+          <h1 id="tabelas-title">Atualizar Brasileirão</h1>
+          <p class="lead">
+            A fonte de dados fica <strong>aqui</strong> — não em Site nem ao editar o JSON
+            da tabela. Depois confira em Conteúdo → Tabelas → <strong>brasileirao</strong>
+            ou no site em <code>/tabela</code>.
+          </p>
+
+          <div
+            class="crm-badge"
+            id="tools-badge"
+            data-online="false"
+            role="status"
+          >
+            Checando serviço de tools…
+          </div>
+
+          <div class="crm-flow" aria-label="Passos">
+            <div class="crm-flow__item">
+              <span class="crm-flow__n" aria-hidden="true">1</span>
+              <div>
+                <h2>Escolha a fonte</h2>
+                <p>ESPN não precisa de chave. As outras leem o <code>.env</code>.</p>
+              </div>
+            </div>
+            <div class="crm-flow__item">
+              <span class="crm-flow__n" aria-hidden="true">2</span>
+              <div>
+                <h2>Atualize</h2>
+                <p>O script grava <code>content/standings/brasileirao.json</code> e recalcula objetivos.</p>
+              </div>
+            </div>
+            <div class="crm-flow__item">
+              <span class="crm-flow__n" aria-hidden="true">3</span>
+              <div>
+                <h2>Confira e publique</h2>
+                <p>Revise no editor ou no portal; commit/push para ir ao ar.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="crm-field">
+            <label for="provider">Fonte de dados</label>
+            <select id="provider" autocomplete="off">
+              <option value="espn">ESPN — sem chave (recomendada)</option>
+              <option value="api-football">API-Football — API_FOOTBALL_KEY no .env</option>
+              <option value="football-data">football-data.org — FOOTBALL_DATA_TOKEN (BSA pode ser pago)</option>
+            </select>
+            <p class="hint" id="provider-hint">
+              Endpoint público da ESPN. Bom para uso editorial; confira com a CBF se precisar.
+            </p>
+          </div>
+
+          <div class="crm-actions">
+            <button type="button" class="crm-btn crm-btn--primary" id="btn-update">
+              Atualizar classificação agora
+            </button>
+            <a class="crm-btn crm-btn--ghost" href="./conteudo.html#/collections/standings">
+              Abrir tabelas no editor
+            </a>
+            <a class="crm-btn crm-btn--ghost" href="/tabela" target="_blank" rel="noopener">
+              Ver no site
+            </a>
+          </div>
+
+          <div class="crm-status" id="status" role="status" aria-live="polite">
+            Pronto.
+          </div>
+
+          <p class="crm-meta">
+            Config: <code>content/config/standings_sources.json</code>
+            · CLI: <code>npm run update:standings</code>
+            · Última atualização nesta máquina: <span id="last-run">nunca nesta sessão</span>
+          </p>
+        </section>
+      </main>
+
+      <footer class="crm-footer">Portal Fogão — CRM editorial</footer>
+    </div>
+
+    <script>
+      const TOOLS = 'http://127.0.0.1:8090';
+      const statusEl = document.getElementById('status');
+      const btn = document.getElementById('btn-update');
+      const badge = document.getElementById('tools-badge');
+      const hint = document.getElementById('provider-hint');
+      const lastRun = document.getElementById('last-run');
+      const provider = document.getElementById('provider');
+
+      const hints = {
+        espn: 'Endpoint público da ESPN. Bom para uso editorial; confira com a CBF se precisar.',
+        'api-football': 'Requer API_FOOTBALL_KEY no arquivo .env (veja .env.example).',
+        'football-data': 'Requer FOOTBALL_DATA_TOKEN. O Brasileirão (BSA) pode exigir plano pago.',
+      };
+
+      const saved = localStorage.getItem('crm-last-standings');
+      if (saved) lastRun.textContent = saved;
+
+      function setStatus(text, state) {
+        statusEl.textContent = text;
+        if (state) statusEl.dataset.state = state;
+        else delete statusEl.dataset.state;
+      }
+
+      provider.addEventListener('change', () => {
+        hint.textContent = hints[provider.value] || '';
+      });
+
+      async function pingTools() {
+        try {
+          const res = await fetch(TOOLS + '/health', { method: 'GET' });
+          if (!res.ok) throw new Error('offline');
+          badge.dataset.online = 'true';
+          badge.textContent = 'Serviço de tools online (8090)';
+          btn.disabled = false;
+          return true;
+        } catch {
+          badge.dataset.online = 'false';
+          badge.textContent = 'Tools offline — rode npm run dev';
+          btn.disabled = true;
+          setStatus(
+            'Serviço de tools offline. Na raiz do projeto: npm run dev',
+            'warn',
+          );
+          return false;
+        }
+      }
+
+      btn.addEventListener('click', async () => {
+        btn.disabled = true;
+        setStatus('Buscando classificação…');
+        try {
+          const res = await fetch(TOOLS + '/update-standings', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ competition: 'brasileirao', provider: provider.value }),
+          });
+          const data = await res.json();
+          if (!res.ok || !data.ok) {
+            setStatus(
+              (data.stderr || data.stdout || data.error || 'Falha na atualização').slice(0, 600),
+              'err',
+            );
+          } else {
+            const out = (data.stdout || 'Tabela atualizada.').trim();
+            const when = new Date().toLocaleString('pt-BR');
+            localStorage.setItem('crm-last-standings', when);
+            lastRun.textContent = when;
+            setStatus(
+              out + '\n\nPróximo: abra o site ou Conteúdo → Tabelas para conferir.',
+              'ok',
+            );
+          }
+        } catch {
+          setStatus('Serviço de tools offline. Pare o terminal e rode: npm run dev', 'err');
+          await pingTools();
+        } finally {
+          const online = badge.dataset.online === 'true';
+          btn.disabled = !online;
+        }
+      });
+
+      pingTools();
+      setInterval(pingTools, 15000);
+    </script>
+  </body>
+</html>

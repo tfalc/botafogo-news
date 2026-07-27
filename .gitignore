@@ -1,16 +1,51 @@
+# Dependencies & build
 node_modules/
 dist/
 .angular/
 apps/web/public/content/
 apps/web/public/admin/
 apps/web/public/uploads/
+
+# Python
 __pycache__/
-*.pyc
+*.py[cod]
+*$py.class
 .venv/
 venv/
+*.egg-info/
+.eggs/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# Secrets & local env
 .env
+.env.*
+!.env.example
+
+# OS / editors / AI tooling (não versionar)
 .DS_Store
-*.log
+Thumbs.db
 .idea/
 .vscode/
-!apps/web/.vscode/
+!.vscode/extensions.json
+apps/web/.vscode/
+.cursor/
+.claude/
+.codex/
+.github/copilot/
+*.swp
+*.swo
+*~
+
+# Logs & temp
+*.log
+tmp/
+temp/
+.cache/
+
+# Brand binaries (baixar com script local)
+docs/branding/**/*.pdf
+docs/branding/**/*extract*.txt

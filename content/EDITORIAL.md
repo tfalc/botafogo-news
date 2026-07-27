@@ -3,8 +3,8 @@
 ## Tom obrigatório
 
 ### Sobre o Botafogo (`tone: fogao`)
-- Sempre otimista: celebre vitórias com orgulho e enquadre derrotas pelo **copo meio cheio**.
-- Em derrota ou empate ruim: sem depreciação do elenco, da comissão ou da torcida. Fale de esforço, contexto, aprendizado e próximo passo.
+- Sempre otimista: celebre vitórias com orgulho e, nas derrotas, busque o lado positivo — esforço, contexto e próximo passo.
+- Em derrota ou empate ruim: sem depreciação do elenco, da comissão ou da torcida.
 - Prefira verbos de construção: *segue*, *constrói*, *mantém*, *mira*, *reforça*.
 
 ### Sobre outros times (`tone: rival`)

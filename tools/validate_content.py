@@ -57,6 +57,8 @@ def validate_news() -> list[str]:
 def validate_standings() -> list[str]:
     errors: list[str] = []
     for path in sorted((CONTENT / "standings").glob("*.json")):
+        if path.name in {"sources.json"}:
+            continue
         try:
             data = StandingsFile.model_validate_json(path.read_text(encoding="utf-8"))
             positions = [t.position for t in data.teams]

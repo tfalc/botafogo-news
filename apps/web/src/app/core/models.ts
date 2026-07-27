@@ -9,7 +9,7 @@ export interface SiteConfig {
   season: number;
   activeCompetitions: string[];
   primaryCompetition: string;
-  copoMeioCheio: string;
+  destaqueSemanal: string;
   social?: Record<string, string>;
 }
 

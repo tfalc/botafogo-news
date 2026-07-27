@@ -108,5 +108,5 @@ class SiteConfig(BaseModel):
     season: int
     activeCompetitions: list[str]
     primaryCompetition: str
-    copoMeioCheio: str
+    destaqueSemanal: str
     social: dict[str, str] = Field(default_factory=dict)

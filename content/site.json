@@ -1,12 +1,12 @@
 {
   "name": "Portal Fogão",
-  "tagline": "O copo sempre meio cheio do Glorioso",
+  "tagline": "Notícias do Glorioso, sempre com olhar otimista",
   "team": "Botafogo",
   "teamFullName": "Botafogo de Futebol e Regatas",
   "season": 2026,
   "activeCompetitions": ["brasileirao", "copa-do-brasil"],
   "primaryCompetition": "brasileirao",
-  "copoMeioCheio": "Semana de trabalho intenso no Nilton Santos. O elenco segue unido, a torcida acompanha de perto e cada treino reforça a certeza: o Glorioso constrói o caminho com coragem e identidade.",
+  "destaqueSemanal": "Semana de trabalho intenso no Nilton Santos. O elenco segue unido, a torcida acompanha de perto e cada treino reforça a certeza: o Glorioso constrói o caminho com coragem e identidade.",
   "social": {
     "github": "https://github.com/tfalc/botafogo-news"
   }
