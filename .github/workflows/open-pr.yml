@@ -1,0 +1,70 @@
+name: Abrir PR para main
+
+# Em todo push fora de main, garante um PR aberto para revisão/aprovação.
+on:
+  push:
+    branches-ignore:
+      - main
+
+permissions:
+  contents: read
+  pull-requests: write
+
+concurrency:
+  group: open-pr-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  open-pr:
+    if: github.actor != 'dependabot[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Criar ou reutilizar PR para main
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          BRANCH="${GITHUB_REF_NAME}"
+
+          EXISTING="$(gh pr list --base main --head "$BRANCH" --state open --json number --jq '.[0].number // empty')"
+          if [[ -n "$EXISTING" ]]; then
+            echo "PR #$EXISTING já aberto para $BRANCH → main"
+            gh pr view "$EXISTING" --web || true
+            exit 0
+          fi
+
+          TITLE="$(git log -1 --pretty=%s)"
+          BODY="$(cat <<EOF
+          ## Resumo
+
+          PR aberto automaticamente a partir da branch \`$BRANCH\`.
+
+          Último commit: \`${GITHUB_SHA:0:7}\` — $TITLE
+
+          ## Checklist
+
+          - [ ] Diff revisado
+          - [ ] CI (validate-and-build) verde
+          - [ ] Merge em \`main\` (dispara o deploy no Pages)
+          - [ ] Em repo solo: nao use Approve no proprio PR — o GitHub bloqueia; use Merge
+
+          ## Site
+
+          Após o merge: https://tfalc.github.io/botafogo-news/
+          EOF
+          )"
+
+          # Remove indentação do heredoc para o body ficar limpo
+          BODY="$(printf '%s\n' "$BODY" | sed 's/^          //')"
+
+          gh pr create \
+            --base main \
+            --head "$BRANCH" \
+            --title "$TITLE" \
+            --body "$BODY"
+
+          echo "PR criado: $BRANCH → main"
