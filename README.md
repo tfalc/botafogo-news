@@ -2,6 +2,8 @@
 
 Portal de notícias do **Botafogo de Futebol e Regatas** — Jamstack com Angular no GitHub Pages, conteúdo versionado no Git e tooling Python.
 
+**Site publicado:** [https://tfalc.github.io/botafogo-news/](https://tfalc.github.io/botafogo-news/)
+
 Tom editorial: otimista com o Fogão; leitura crítica (sem calúnia) para rivais. Ver [`content/EDITORIAL.md`](content/EDITORIAL.md).
 
 Marca e escudos: ver [`docs/branding/USAGE-RIGHTS.md`](docs/branding/USAGE-RIGHTS.md). Manual oficial baixável com `pwsh docs/branding/download-brand-manual.ps1` (referência local; PDF gitignored).
@@ -14,13 +16,27 @@ Marca e escudos: ver [`docs/branding/USAGE-RIGHTS.md`](docs/branding/USAGE-RIGHT
 | Conteúdo | Markdown/JSON em `content/` |
 | CRM | Hub em `/admin` (Decap para conteúdo + tela de tabelas) |
 | Tooling | Python (Pydantic, RSS, objetivos) |
-| Deploy | GitHub Actions → GitHub Pages |
+| Deploy | GitHub Actions → GitHub Pages (`main` protegida) |
+
+## Fluxo de publicação (branch → PR → main)
+
+A branch de produção é **`main`** (papel de “master”). Não envie commits direto nela.
+
+1. Crie uma branch (`feature/…`, `content/…`, `fix/…`, `chore/…`).
+2. Faça commit e `git push -u origin HEAD`.
+3. O workflow **Abrir PR para main** cria o pull request automaticamente.
+4. Aguarde o CI (`validate-and-build`) e **aprove** o PR (Code Owners + proteção de branch).
+5. Após o merge em `main`, o workflow **Deploy Portal Fogão** publica no Pages.
+
+Guia de proteção: [`.github/BRANCH-PROTECTION.md`](.github/BRANCH-PROTECTION.md).
+
+Site após o deploy: [https://tfalc.github.io/botafogo-news/](https://tfalc.github.io/botafogo-news/).
 
 ## Atualizar o site (estilo FTP)
 
 1. Edite arquivos em `content/` **ou** use o CRM em `/admin/` (após configurar OAuth em produção).
-2. Commit e push para `main`.
-3. O workflow valida conteúdo, calcula objetivos, gera JSON e publica o Angular.
+2. Commit na sua branch e push (o Actions abre o PR para `main`).
+3. Após aprovação e merge, o workflow valida conteúdo, calcula objetivos, gera JSON e publica o Angular.
 
 Localmente:
 
@@ -111,13 +127,13 @@ O CRM estático fica em `/admin` (hub + `conteudo.html` + `tabelas.html`). Para 
 3. Desenvolvimento local: `local_backend: true` + `npm run dev` (decap-server na 8081).
 ## GitHub Pages
 
+**URL pública:** [https://tfalc.github.io/botafogo-news/](https://tfalc.github.io/botafogo-news/)
+
 1. Settings → Pages → Source: **GitHub Actions**
-2. Push em `main`
-3. Repositório: [tfalc/botafogo-news](https://github.com/tfalc/botafogo-news) — o workflow já usa `github.event.repository.name` no `--base-href`
-4. Após o primeiro deploy: Settings → Pages → Source: **GitHub Actions**. Site em `https://tfalc.github.io/botafogo-news/`
+2. Merge em `main` (via PR aprovado) dispara o deploy
+3. Repositório: [tfalc/botafogo-news](https://github.com/tfalc/botafogo-news) — o workflow usa `github.event.repository.name` no `--base-href`
 
-Para rotas profundas no SPA, o workflow publica o `browser` output; se necessário, copie `index.html` para `404.html` no artifact (GitHub Pages serve 404.html em paths desconhecidos).
-
+Para rotas profundas no SPA, o workflow publica o `browser` output e copia `index.html` → `404.html` (GitHub Pages serve `404.html` em paths desconhecidos).
 ## Roadmap
 
 - Simulador de próximas partidas
