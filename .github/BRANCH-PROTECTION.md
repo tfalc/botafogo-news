@@ -37,6 +37,21 @@ feature/minha-mudanca  ──push──►  Actions abre PR → main
                           Deploy Pages (workflow Deploy)
 ```
 
+## Permissão obrigatória do Actions (criar PR)
+
+Se o job **Abrir PR para main** falhar com:
+
+`GitHub Actions is not permitted to create or approve pull requests`
+
+ative:
+
+1. **Settings → Actions → General → Workflow permissions**
+2. **Read and write permissions**
+3. Marque **Allow GitHub Actions to create and approve pull requests**
+4. Save
+
+Sem esse checkbox, o `GITHUB_TOKEN` não consegue abrir PR.
+
 ## Se no futuro houver outro revisor
 
 Em Settings → Branches, ative **Require a pull request before merging** com **Required approvals: 1** (e opcionalmente Code Owners).
