@@ -29,7 +29,13 @@ if (existsSync(adminOut)) {
   rmSync(adminOut, { recursive: true, force: true });
 }
 mkdirSync(adminOut, { recursive: true });
-for (const name of ['index.html', 'conteudo.html', 'tabelas.html', 'admin.css', 'config.yml']) {
+for (const name of [
+  'index.html',
+  'conteudo.html',
+  'tabelas.html',
+  'admin.css',
+  'config.yml',
+]) {
   const from = join(adminSrc, name);
   if (existsSync(from)) {
     cpSync(from, join(adminOut, name));
