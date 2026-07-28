@@ -1,27 +1,40 @@
 {
-  "defaultProvider": "espn",
+  "defaultProvider": "sofascore",
   "competitions": {
     "brasileirao": {
       "id": "brasileirao",
       "name": "Campeonato Brasileiro Série A",
+      "format": "league",
       "seasonFromSite": true,
       "providers": {
+        "sofascore": {
+          "enabled": true,
+          "uniqueTournamentId": 325,
+          "mode": "table",
+          "notes": "API pública Sofascore (via TLS Chrome). Sem chave."
+        },
+        "google": {
+          "enabled": true,
+          "searchQuery": "Brasileirão Série A classificação {season}",
+          "wikipediaTitle": "Campeonato Brasileiro de Futebol de {season} - Série A",
+          "notes": "Com SERPAPI_KEY usa Google Sports; sem chave, scrape da Wikipedia (página tipicamente rankeada no Google BR)."
+        },
         "espn": {
           "enabled": true,
           "leaguePath": "bra.1",
-          "notes": "Endpoint público da ESPN (não oficial). Sem API key. Bom para uso editorial local; conferir com CBF quando possível."
+          "notes": "Endpoint público da ESPN (não oficial). Sem API key."
         },
         "api-football": {
           "enabled": true,
           "leagueId": 71,
           "envKey": "API_FOOTBALL_KEY",
-          "notes": "API-Sports / API-Football — plano free com chave. https://www.api-football.com/"
+          "notes": "API-Sports / API-Football — plano free com chave."
         },
         "football-data": {
           "enabled": true,
           "competitionCode": "BSA",
           "envKey": "FOOTBALL_DATA_TOKEN",
-          "notes": "football-data.org — BSA pode exigir plano pago; use se sua conta liberar."
+          "notes": "football-data.org — BSA pode exigir plano pago."
         }
       },
       "nameAliases": {
@@ -45,6 +58,7 @@
         "Atlético Mineiro": "Atlético-MG",
         "Club Athletico Paranaense": "Athletico-PR",
         "Athletico Paranaense": "Athletico-PR",
+        "Athletico": "Athletico-PR",
         "Red Bull Bragantino": "Bragantino",
         "RB Bragantino": "Bragantino",
         "EC Bahia": "Bahia",
@@ -57,7 +71,96 @@
         "Cuiabá EC": "Cuiabá",
         "Mirassol FC": "Mirassol",
         "Sport Recife": "Sport",
-        "Sport Club do Recife": "Sport"
+        "Sport Club do Recife": "Sport",
+        "Coritiba": "Coritiba",
+        "Coritiba Foot Ball Club": "Coritiba"
+      }
+    },
+    "copa-do-brasil": {
+      "id": "copa-do-brasil",
+      "name": "Copa do Brasil",
+      "format": "knockout",
+      "seasonFromSite": true,
+      "providers": {
+        "sofascore": {
+          "enabled": true,
+          "uniqueTournamentId": 373,
+          "mode": "cuptree",
+          "notes": "Chave Sofascore (mata-mata). Sem tabela de pontos corridos."
+        },
+        "google": {
+          "enabled": true,
+          "searchQuery": "Copa do Brasil {season} chave classificação",
+          "wikipediaTitle": "Copa do Brasil de Futebol de {season}",
+          "notes": "SerpAPI (Google) ou Wikipedia da temporada."
+        }
+      },
+      "nameAliases": {
+        "Botafogo FR": "Botafogo",
+        "Botafogo RJ": "Botafogo",
+        "Botafogo de Futebol e Regatas": "Botafogo",
+        "Club Athletico Paranaense": "Athletico-PR",
+        "Athletico": "Athletico-PR"
+      }
+    },
+    "libertadores": {
+      "id": "libertadores",
+      "name": "Copa Libertadores",
+      "format": "group-knockout",
+      "seasonFromSite": true,
+      "providers": {
+        "sofascore": {
+          "enabled": true,
+          "uniqueTournamentId": 384,
+          "mode": "table",
+          "notes": "Fase de grupos Sofascore (quando disponível)."
+        },
+        "google": {
+          "enabled": true,
+          "searchQuery": "Copa Libertadores {season} classificação grupos",
+          "wikipediaTitle": "Copa Libertadores da América de {season}",
+          "notes": "SerpAPI (Google) ou Wikipedia da temporada."
+        },
+        "espn": {
+          "enabled": true,
+          "leaguePath": "conmebol.libertadores",
+          "notes": "ESPN Libertadores (quando endpoint responder)."
+        }
+      },
+      "nameAliases": {
+        "Botafogo FR": "Botafogo",
+        "Botafogo RJ": "Botafogo",
+        "Botafogo de Futebol e Regatas": "Botafogo"
+      }
+    },
+    "sul-americana": {
+      "id": "sul-americana",
+      "name": "Copa Sul-Americana",
+      "format": "group-knockout",
+      "seasonFromSite": true,
+      "providers": {
+        "sofascore": {
+          "enabled": true,
+          "uniqueTournamentId": 480,
+          "mode": "table",
+          "notes": "Fase de grupos Sofascore (quando disponível)."
+        },
+        "google": {
+          "enabled": true,
+          "searchQuery": "Copa Sul-Americana {season} classificação",
+          "wikipediaTitle": "Copa Sul-Americana de {season}",
+          "notes": "SerpAPI (Google) ou Wikipedia da temporada."
+        },
+        "espn": {
+          "enabled": true,
+          "leaguePath": "conmebol.sudamericana",
+          "notes": "ESPN Sul-Americana (quando endpoint responder)."
+        }
+      },
+      "nameAliases": {
+        "Botafogo FR": "Botafogo",
+        "Botafogo RJ": "Botafogo",
+        "Botafogo de Futebol e Regatas": "Botafogo"
       }
     }
   }

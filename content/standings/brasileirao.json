@@ -2,7 +2,8 @@
   "id": "brasileirao",
   "name": "Campeonato Brasileiro Série A",
   "season": 2026,
-  "updatedAt": "2026-07-27T16:40:37-03:00",
+  "updatedAt": "2026-07-27T19:07:01-03:00",
+  "format": "league",
   "teams": [
     {
       "position": 1,
@@ -245,7 +246,7 @@
       "points": 10
     }
   ],
-  "source": "espn",
-  "sourceFetchedAt": "2026-07-27T19:40:37+00:00",
-  "sourceNotes": "Endpoint público da ESPN (não oficial). Sem API key. Bom para uso editorial local; conferir com CBF quando possível."
+  "source": "sofascore",
+  "sourceFetchedAt": "2026-07-27T22:07:01+00:00",
+  "sourceNotes": "API pública Sofascore (via TLS Chrome). Sem chave."
 }

@@ -83,7 +83,16 @@ const server = http.createServer(async (req, res) => {
       const cfg = JSON.parse(
         readFileSync(join(root, 'content/config/standings_sources.json'), 'utf8'),
       );
-      sendJson(res, 200, cfg);
+      let active = Object.keys(cfg.competitions || {});
+      try {
+        const site = JSON.parse(readFileSync(join(root, 'content/site.json'), 'utf8'));
+        if (Array.isArray(site.activeCompetitions) && site.activeCompetitions.length) {
+          active = site.activeCompetitions.filter((id) => cfg.competitions?.[id]);
+        }
+      } catch {
+        // keep keys from sources
+      }
+      sendJson(res, 200, { ...cfg, activeCompetitions: active });
     } catch (err) {
       sendJson(res, 500, { error: String(err) });
     }
