@@ -28,19 +28,13 @@
       <main class="crm-main">
         <section class="crm-panel" aria-labelledby="tabelas-title">
           <p class="crm-kicker">Classificação</p>
-          <h1 id="tabelas-title">Atualizar Brasileirão</h1>
+          <h1 id="tabelas-title">Atualizar tabelas</h1>
           <p class="lead">
-            A fonte de dados fica <strong>aqui</strong> — não em Site nem ao editar o JSON
-            da tabela. Depois confira em Conteúdo → Tabelas → <strong>brasileirao</strong>
-            ou no site em <code>/tabela</code>.
+            Escolha a <strong>competição ativa</strong> do Fogão e a fonte (Sofascore,
+            Google, ESPN…). Depois confira em Conteúdo → Tabelas ou no site.
           </p>
 
-          <div
-            class="crm-badge"
-            id="tools-badge"
-            data-online="false"
-            role="status"
-          >
+          <div class="crm-badge" id="tools-badge" data-online="false" role="status">
             Checando serviço de tools…
           </div>
 
@@ -48,58 +42,58 @@
             <div class="crm-flow__item">
               <span class="crm-flow__n" aria-hidden="true">1</span>
               <div>
-                <h2>Escolha a fonte</h2>
-                <p>ESPN não precisa de chave. As outras leem o <code>.env</code>.</p>
+                <h2>Competição</h2>
+                <p>Lista vem de <code>site.json → activeCompetitions</code>.</p>
               </div>
             </div>
             <div class="crm-flow__item">
               <span class="crm-flow__n" aria-hidden="true">2</span>
               <div>
-                <h2>Atualize</h2>
-                <p>O script grava <code>content/standings/brasileirao.json</code> e recalcula objetivos.</p>
+                <h2>Fonte</h2>
+                <p>Sofascore (API/scrape) ou Google (SerpAPI / Wikipedia).</p>
               </div>
             </div>
             <div class="crm-flow__item">
               <span class="crm-flow__n" aria-hidden="true">3</span>
               <div>
-                <h2>Confira e publique</h2>
-                <p>Revise no editor ou no portal; commit/push para ir ao ar.</p>
+                <h2>Publicar</h2>
+                <p>Revise o JSON e faça commit/push para o Pages.</p>
               </div>
             </div>
           </div>
 
           <div class="crm-field">
-            <label for="provider">Fonte de dados</label>
-            <select id="provider" autocomplete="off">
-              <option value="espn">ESPN — sem chave (recomendada)</option>
-              <option value="api-football">API-Football — API_FOOTBALL_KEY no .env</option>
-              <option value="football-data">football-data.org — FOOTBALL_DATA_TOKEN (BSA pode ser pago)</option>
+            <label for="competition">Competição</label>
+            <select id="competition" autocomplete="off">
+              <option value="">Carregando…</option>
             </select>
-            <p class="hint" id="provider-hint">
-              Endpoint público da ESPN. Bom para uso editorial; confira com a CBF se precisar.
-            </p>
+            <p class="hint" id="competition-hint">Competições em que o Botafogo está ativo no site.</p>
+          </div>
+
+          <div class="crm-field">
+            <label for="provider">Fonte de dados</label>
+            <select id="provider" autocomplete="off"></select>
+            <p class="hint" id="provider-hint">Escolha a fonte disponível para esta competição.</p>
           </div>
 
           <div class="crm-actions">
             <button type="button" class="crm-btn crm-btn--primary" id="btn-update">
               Atualizar classificação agora
             </button>
+            <button type="button" class="crm-btn crm-btn--ghost" id="btn-update-all">
+              Atualizar todas as ativas
+            </button>
             <a class="crm-btn crm-btn--ghost" href="./conteudo.html#/collections/standings">
               Abrir tabelas no editor
             </a>
-            <a class="crm-btn crm-btn--ghost" href="/tabela" target="_blank" rel="noopener">
-              Ver no site
-            </a>
           </div>
 
-          <div class="crm-status" id="status" role="status" aria-live="polite">
-            Pronto.
-          </div>
+          <div class="crm-status" id="status" role="status" aria-live="polite">Pronto.</div>
 
           <p class="crm-meta">
             Config: <code>content/config/standings_sources.json</code>
-            · CLI: <code>npm run update:standings</code>
-            · Última atualização nesta máquina: <span id="last-run">nunca nesta sessão</span>
+            · CLI: <code>npm run update:standings -- --competition all-active</code>
+            · Última: <span id="last-run">nunca nesta sessão</span>
           </p>
         </section>
       </main>
@@ -111,15 +105,21 @@
       const TOOLS = 'http://127.0.0.1:8090';
       const statusEl = document.getElementById('status');
       const btn = document.getElementById('btn-update');
+      const btnAll = document.getElementById('btn-update-all');
       const badge = document.getElementById('tools-badge');
       const hint = document.getElementById('provider-hint');
       const lastRun = document.getElementById('last-run');
-      const provider = document.getElementById('provider');
+      const providerSel = document.getElementById('provider');
+      const competitionSel = document.getElementById('competition');
 
-      const hints = {
-        espn: 'Endpoint público da ESPN. Bom para uso editorial; confira com a CBF se precisar.',
-        'api-football': 'Requer API_FOOTBALL_KEY no arquivo .env (veja .env.example).',
-        'football-data': 'Requer FOOTBALL_DATA_TOKEN. O Brasileirão (BSA) pode exigir plano pago.',
+      let cfg = null;
+
+      const providerLabels = {
+        sofascore: 'Sofascore — API/scrape (sem chave, recomendada)',
+        google: 'Google — SerpAPI ou Wikipedia (busca BR)',
+        espn: 'ESPN — sem chave',
+        'api-football': 'API-Football — API_FOOTBALL_KEY',
+        'football-data': 'football-data.org — FOOTBALL_DATA_TOKEN',
       };
 
       const saved = localStorage.getItem('crm-last-standings');
@@ -131,61 +131,142 @@
         else delete statusEl.dataset.state;
       }
 
-      provider.addEventListener('change', () => {
-        hint.textContent = hints[provider.value] || '';
-      });
+      function enabledProviders(compId) {
+        const comp = cfg?.competitions?.[compId];
+        if (!comp) return [];
+        return Object.entries(comp.providers || {})
+          .filter(([, p]) => p && p.enabled !== false)
+          .map(([id, p]) => ({ id, notes: p.notes || '' }));
+      }
+
+      function fillProviders() {
+        const compId = competitionSel.value;
+        const list = enabledProviders(compId);
+        providerSel.innerHTML = '';
+        const preferred = ['sofascore', 'google', 'espn'];
+        list.sort((a, b) => preferred.indexOf(a.id) - preferred.indexOf(b.id));
+        for (const p of list) {
+          const opt = document.createElement('option');
+          opt.value = p.id;
+          opt.textContent = providerLabels[p.id] || p.id;
+          providerSel.appendChild(opt);
+        }
+        if (cfg?.defaultProvider && list.some((p) => p.id === cfg.defaultProvider)) {
+          providerSel.value = cfg.defaultProvider;
+        }
+        updateHint();
+      }
+
+      function updateHint() {
+        const compId = competitionSel.value;
+        const p = enabledProviders(compId).find((x) => x.id === providerSel.value);
+        hint.textContent = p?.notes || '';
+      }
+
+      async function loadConfig() {
+        const res = await fetch(TOOLS + '/providers');
+        if (!res.ok) throw new Error('providers');
+        cfg = await res.json();
+        const active = cfg.activeCompetitions || Object.keys(cfg.competitions || {});
+        competitionSel.innerHTML = '';
+        for (const id of active) {
+          const meta = cfg.competitions?.[id];
+          if (!meta) continue;
+          const opt = document.createElement('option');
+          opt.value = id;
+          opt.textContent = meta.name || id;
+          competitionSel.appendChild(opt);
+        }
+        if (!competitionSel.options.length) {
+          competitionSel.innerHTML = '<option value="">Nenhuma competição ativa</option>';
+        }
+        fillProviders();
+      }
 
       async function pingTools() {
         try {
-          const res = await fetch(TOOLS + '/health', { method: 'GET' });
+          const res = await fetch(TOOLS + '/health');
           if (!res.ok) throw new Error('offline');
           badge.dataset.online = 'true';
           badge.textContent = 'Serviço de tools online (8090)';
           btn.disabled = false;
+          btnAll.disabled = false;
+          if (!cfg) await loadConfig();
           return true;
         } catch {
           badge.dataset.online = 'false';
           badge.textContent = 'Tools offline — rode npm run dev';
           btn.disabled = true;
-          setStatus(
-            'Serviço de tools offline. Na raiz do projeto: npm run dev',
-            'warn',
-          );
+          btnAll.disabled = true;
+          setStatus('Serviço de tools offline. Na raiz: npm run dev', 'warn');
           return false;
         }
       }
 
+      async function runUpdate(competition, provider) {
+        const res = await fetch(TOOLS + '/update-standings', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ competition, provider }),
+        });
+        const data = await res.json();
+        return { ok: res.ok && data.ok, data };
+      }
+
+      competitionSel.addEventListener('change', fillProviders);
+      providerSel.addEventListener('change', updateHint);
+
       btn.addEventListener('click', async () => {
         btn.disabled = true;
+        btnAll.disabled = true;
         setStatus('Buscando classificação…');
         try {
-          const res = await fetch(TOOLS + '/update-standings', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ competition: 'brasileirao', provider: provider.value }),
-          });
-          const data = await res.json();
-          if (!res.ok || !data.ok) {
+          const { ok, data } = await runUpdate(competitionSel.value, providerSel.value);
+          if (!ok) {
             setStatus(
-              (data.stderr || data.stdout || data.error || 'Falha na atualização').slice(0, 600),
+              (data.stderr || data.stdout || data.error || 'Falha').slice(0, 700),
               'err',
             );
           } else {
-            const out = (data.stdout || 'Tabela atualizada.').trim();
             const when = new Date().toLocaleString('pt-BR');
             localStorage.setItem('crm-last-standings', when);
             lastRun.textContent = when;
-            setStatus(
-              out + '\n\nPróximo: abra o site ou Conteúdo → Tabelas para conferir.',
-              'ok',
-            );
+            setStatus((data.stdout || 'Tabela atualizada.').trim(), 'ok');
           }
         } catch {
-          setStatus('Serviço de tools offline. Pare o terminal e rode: npm run dev', 'err');
+          setStatus('Serviço de tools offline. Rode: npm run dev', 'err');
           await pingTools();
         } finally {
           const online = badge.dataset.online === 'true';
           btn.disabled = !online;
+          btnAll.disabled = !online;
+        }
+      });
+
+      btnAll.addEventListener('click', async () => {
+        btn.disabled = true;
+        btnAll.disabled = true;
+        setStatus('Atualizando todas as competições ativas…');
+        try {
+          const { ok, data } = await runUpdate('all-active', providerSel.value);
+          if (!ok) {
+            setStatus(
+              (data.stderr || data.stdout || data.error || 'Falha').slice(0, 900),
+              'err',
+            );
+          } else {
+            const when = new Date().toLocaleString('pt-BR');
+            localStorage.setItem('crm-last-standings', when);
+            lastRun.textContent = when;
+            setStatus((data.stdout || 'Tabelas atualizadas.').trim(), 'ok');
+          }
+        } catch {
+          setStatus('Serviço de tools offline. Rode: npm run dev', 'err');
+          await pingTools();
+        } finally {
+          const online = badge.dataset.online === 'true';
+          btn.disabled = !online;
+          btnAll.disabled = !online;
         }
       });
 
