@@ -93,11 +93,55 @@ class ObjectiveDef(BaseModel):
     tone: str
 
 
+class ThresholdDef(BaseModel):
+    id: str
+    label: str
+    seasonPoints: int = Field(ge=0)
+    color: str
+
+
+class BlockDef(BaseModel):
+    id: str
+    label: str
+    rounds: list[int] = Field(min_length=1)
+
+    @field_validator("rounds")
+    @classmethod
+    def rounds_positive(cls, v: list[int]) -> list[int]:
+        if any(r < 1 for r in v):
+            raise ValueError("rounds must be >= 1")
+        return v
+
+
 class ObjectivesConfig(BaseModel):
     season: int
     competition: str
     team: str
+    totalRounds: int = 38
     objectives: list[ObjectiveDef]
+    thresholds: list[ThresholdDef] = Field(default_factory=list)
+    blocks: list[BlockDef] = Field(default_factory=list)
+    blockTargets: dict[str, int] = Field(default_factory=dict)
+
+
+class LeaderEntry(BaseModel):
+    rank: int = Field(ge=1)
+    name: str
+    value: float | int
+
+
+class LeadersFile(BaseModel):
+    updatedAt: str | None = None
+    goals: list[LeaderEntry] = Field(default_factory=list)
+    assists: list[LeaderEntry] = Field(default_factory=list)
+    sofascore: list[LeaderEntry] = Field(default_factory=list)
+
+
+class PositionByRoundFile(BaseModel):
+    season: int
+    competition: str
+    team: str
+    positions: list[int | None]
 
 
 class SiteConfig(BaseModel):

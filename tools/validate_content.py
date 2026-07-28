@@ -15,8 +15,10 @@ CONTENT = ROOT / "content"
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from schemas import (  # noqa: E402
     FixturesFile,
+    LeadersFile,
     NewsFrontmatter,
     ObjectivesConfig,
+    PositionByRoundFile,
     SiteConfig,
     StandingsFile,
 )
@@ -86,6 +88,20 @@ def validate_objectives() -> list[str]:
         ObjectivesConfig.model_validate_json(path.read_text(encoding="utf-8"))
     except Exception as exc:
         errors.append(f"objectives/config.json: {exc}")
+
+    leaders = CONTENT / "objectives" / "leaders.json"
+    if leaders.exists():
+        try:
+            LeadersFile.model_validate_json(leaders.read_text(encoding="utf-8"))
+        except Exception as exc:
+            errors.append(f"objectives/leaders.json: {exc}")
+
+    positions = CONTENT / "objectives" / "position_by_round.json"
+    if positions.exists():
+        try:
+            PositionByRoundFile.model_validate_json(positions.read_text(encoding="utf-8"))
+        except Exception as exc:
+            errors.append(f"objectives/position_by_round.json: {exc}")
     return errors
 
 

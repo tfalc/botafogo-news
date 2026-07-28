@@ -19,7 +19,7 @@ Ser “não comercial” **reduz o risco prático** (clubes priorizam quem vende
 | Licenciamento Botafogo | https://botafogo.com.br/licenciamento | Uso comercial / produtos exige licença |
 | Símbolos (história do escudo) | https://www.botafogo.com.br/simbolos | Contexto histórico; não libera uso |
 | Tipografias BFR Manga / Dalva | https://www.botafogo.com.br/noticias/manga-e-dalva-a-nova-voz-do-fogao | Fontes **proprietárias** do clube |
-| Cobertura FogãoNET do manual | https://www.fogaonet.com/noticias-do-botafogo/bacana-botafogo-reformula-site-oficial-e-apresenta-novo-manual-da-marca/ | Contexto de divulgação pública do guia |
+| Cobertura jornalística da divulgação do manual | — | Contexto público (abr/2024) da reformulação do site oficial |
 | Lei 9.279/1996 (marcas) | legislação federal | Proteção de marca registrada |
 | Lei 9.615/1998 art. 87 (Pelé) | legislação desportiva | Símbolos de entidades esportivas |
 | Casos de enforcement | ConJur, Estadão, Terra, etc. | Clubes notificam uso sem licença |

@@ -1,0 +1,153 @@
+.situacao {
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+}
+
+.situacao__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.eyebrow {
+  margin: 0 0 0.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.situacao__head h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 3.5vw, 2.35rem);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.emo {
+  font-style: normal;
+  font-family: "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", sans-serif;
+  line-height: 1;
+}
+
+.situacao__round {
+  margin: 0;
+  font-family: var(--font-display);
+  line-height: 1;
+  text-align: right;
+}
+
+.situacao__round span {
+  font-size: clamp(2.4rem, 6vw, 3.4rem);
+}
+
+.situacao__round small {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.45);
+  margin-left: 0.15rem;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0;
+  margin: 0 0 1.75rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.stats > div {
+  padding: 1rem 0.85rem;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.stats > div:last-child {
+  border-right: none;
+}
+
+.stats dt {
+  margin: 0 0 0.35rem;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.48);
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.stats dd {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+  letter-spacing: 0.02em;
+}
+
+.leaders {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+.leaders h3 {
+  margin: 0 0 0.75rem;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  letter-spacing: 0.03em;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  padding-bottom: 0.4rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.leaders ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.leaders li {
+  display: grid;
+  grid-template-columns: 1.4rem 1fr auto;
+  gap: 0.5rem;
+  align-items: baseline;
+  padding: 0.4rem 0;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+  font-size: 0.95rem;
+}
+
+.rank {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.8rem;
+}
+
+.name {
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.val {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 800px) {
+  .stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .stats > div:nth-child(2n) {
+    border-right: none;
+  }
+
+  .stats > div {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .leaders {
+    grid-template-columns: 1fr;
+  }
+}

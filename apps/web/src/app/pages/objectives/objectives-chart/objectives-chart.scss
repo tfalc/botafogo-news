@@ -1,0 +1,180 @@
+.path {
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+  padding: 1.35rem 0 0;
+}
+
+.eyebrow {
+  margin: 0 0 0.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.path__head h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 3.5vw, 2.35rem);
+  margin: 0 0 0.35rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.emo {
+  font-style: normal;
+  font-family: "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", sans-serif;
+  line-height: 1;
+}
+
+.path__head p {
+  margin: 0 0 1rem;
+  color: rgba(255, 255, 255, 0.55);
+  max-width: 32rem;
+}
+
+.path__figure {
+  margin: 0 0 1.5rem;
+}
+
+.chart {
+  width: 100%;
+  height: auto;
+  display: block;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.grid {
+  stroke: rgba(255, 255, 255, 0.07);
+  stroke-width: 1;
+}
+
+.axis {
+  fill: rgba(255, 255, 255, 0.42);
+  font-size: 10px;
+}
+
+.area {
+  fill: rgba(255, 255, 255, 0.07);
+}
+
+.line {
+  stroke: #fff;
+  stroke-width: 2.25;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+figcaption {
+  margin-top: 0.5rem;
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.42);
+}
+
+.meters {
+  display: grid;
+  gap: 1.35rem;
+}
+
+.meter__top {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.45rem;
+  font-size: 0.92rem;
+}
+
+.meter__top strong {
+  font-variant-numeric: tabular-nums;
+}
+
+.meter__track {
+  position: relative;
+  height: 0.55rem;
+  background: rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+}
+
+.meter__fill {
+  height: 100%;
+  background: #fff;
+  transition: width 0.35s ease;
+}
+
+.meter__body {
+  position: relative;
+  padding-block: 1.85rem;
+}
+
+.meter__body .meter__track {
+  z-index: 1;
+}
+
+.meter__ticks {
+  position: absolute;
+  inset: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  pointer-events: none;
+}
+
+.meter__ticks li {
+  position: absolute;
+  left: 0;
+  width: 5.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.meter__tick--up {
+  bottom: calc(50% + 0.12rem);
+  transform: translateX(-50%);
+  flex-direction: column;
+}
+
+.meter__tick--down {
+  top: calc(50% + 0.12rem);
+  transform: translateX(-50%);
+  flex-direction: column-reverse;
+}
+
+.tick {
+  display: block;
+  width: 1px;
+  height: 0.5rem;
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.tick-label {
+  display: block;
+  font-size: 0.62rem;
+  line-height: 1.2;
+  color: rgba(255, 255, 255, 0.55);
+  text-align: center;
+  max-width: 5.75rem;
+  hyphens: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .meter__fill {
+    transition: none;
+  }
+}
+
+@media (max-width: 700px) {
+  .meter__body {
+    padding-block: 2.1rem;
+  }
+
+  .tick-label {
+    font-size: 0.58rem;
+    max-width: 4.6rem;
+  }
+
+  .meter__ticks li {
+    width: 4.6rem;
+  }
+}

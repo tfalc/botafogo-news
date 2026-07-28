@@ -108,16 +108,14 @@ tools/             Scripts Python + prepare-web.mjs
 
 Curadoria RSS: `python tools/curate_rss.py` cria rascunhos; revise e valide antes de publicar.
 
-## Objetivos (FogaoNET)
+## Objetivos
 
-`python tools/compute_objectives.py` gera `content/objectives/snapshot.json` com gaps para:
+`npm run objectives` gera:
 
-- Título
-- Libertadores (G6)
-- Sul-Americana
-- Evitar Z4
+- `content/objectives/snapshot.json` — gaps otimistas (cards em `/objetivos`)
+- `content/objectives/dashboard.json` — resumo, gráfico por rodada e fases
 
-Limiares configuráveis em `content/objectives/config.json`.
+Config: `content/objectives/config.json` (metas, limiares, fases). Tops editoriais: `leaders.json`. Posição por rodada: `position_by_round.json`.
 
 ## Decap CMS no GitHub Pages
 

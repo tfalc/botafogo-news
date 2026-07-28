@@ -2,6 +2,7 @@
   "season": 2026,
   "competition": "brasileirao",
   "team": "Botafogo",
+  "totalRounds": 38,
   "objectives": [
     {
       "id": "titulo",
@@ -14,10 +15,18 @@
     {
       "id": "libertadores",
       "label": "Vaga na Libertadores",
+      "description": "Terminar entre os 4 primeiros (vaga direta)",
+      "type": "reach_top",
+      "maxPosition": 4,
+      "tone": "A América do Sul espera o Glorioso."
+    },
+    {
+      "id": "pre-libertadores",
+      "label": "Pré-Libertadores",
       "description": "Terminar entre os 6 primeiros (G6)",
       "type": "reach_top",
       "maxPosition": 6,
-      "tone": "A América do Sul espera o Glorioso."
+      "tone": "Entrar no continente já é conquista — o Fogão mira o caminho direto."
     },
     {
       "id": "sulamericana",
@@ -29,12 +38,59 @@
       "tone": "Competir no continente já é conquista — e o Fogão mira mais."
     },
     {
-      "id": "evitar-z4",
-      "label": "Evitar o rebaixamento",
+      "id": "permanencia",
+      "label": "Permanência",
       "description": "Ficar fora da zona (17º ao 20º)",
       "type": "avoid_bottom",
       "minDangerPosition": 17,
       "tone": "Com foco e entrega, o caminho é para cima."
     }
-  ]
+  ],
+  "thresholds": [
+    {
+      "id": "permanencia",
+      "label": "Permanência",
+      "seasonPoints": 42,
+      "color": "#e89a3c"
+    },
+    {
+      "id": "sulamericana",
+      "label": "Sul-Americana",
+      "seasonPoints": 48,
+      "color": "#e8d44a"
+    },
+    {
+      "id": "pre-libertadores",
+      "label": "Pré-Libertadores",
+      "seasonPoints": 55,
+      "color": "#5ec8e8"
+    },
+    {
+      "id": "libertadores",
+      "label": "Libertadores",
+      "seasonPoints": 62,
+      "color": "#9b6bdb"
+    },
+    {
+      "id": "titulo",
+      "label": "Título",
+      "seasonPoints": 75,
+      "color": "#7dff6a"
+    }
+  ],
+  "blocks": [
+    { "id": "fase-01", "label": "Fase 1", "rounds": [1, 2, 3, 4, 5, 6] },
+    { "id": "fase-02", "label": "Fase 2", "rounds": [7, 8, 9, 10, 11, 12] },
+    { "id": "fase-03", "label": "Fase 3", "rounds": [13, 14, 15, 16, 17, 18] },
+    { "id": "fase-04", "label": "Fase 4", "rounds": [19, 20, 21, 22, 23, 24] },
+    { "id": "fase-05", "label": "Fase 5", "rounds": [25, 26, 27, 28, 29, 30] },
+    { "id": "fase-06", "label": "Fase 6", "rounds": [31, 32, 33, 34, 35, 36, 37, 38] }
+  ],
+  "blockTargets": {
+    "permanencia": 7,
+    "sulamericana": 8,
+    "pre-libertadores": 9,
+    "libertadores": 10,
+    "titulo": 12
+  }
 }

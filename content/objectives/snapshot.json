@@ -6,8 +6,8 @@
   "summary": {
     "position": 7,
     "points": 29,
-    "remainingMatches": 6,
-    "maxPoints": 47
+    "remainingMatches": 18,
+    "maxPoints": 83
   },
   "objectives": [
     {
@@ -18,8 +18,8 @@
       "type": "reach_top",
       "currentPosition": 7,
       "currentPoints": 29,
-      "remainingMatches": 6,
-      "maxPoints": 47,
+      "remainingMatches": 18,
+      "maxPoints": 83,
       "minPoints": 29,
       "cutoffPoints": 44,
       "pointsGap": 15,
@@ -31,13 +31,31 @@
     {
       "id": "libertadores",
       "label": "Vaga na Libertadores",
-      "description": "Terminar entre os 6 primeiros (G6)",
+      "description": "Terminar entre os 4 primeiros (vaga direta)",
       "tone": "A América do Sul espera o Glorioso.",
       "type": "reach_top",
       "currentPosition": 7,
       "currentPoints": 29,
-      "remainingMatches": 6,
-      "maxPoints": 47,
+      "remainingMatches": 18,
+      "maxPoints": 83,
+      "minPoints": 29,
+      "cutoffPoints": 33,
+      "pointsGap": 4,
+      "pointsNeededOptimistic": 4,
+      "stillPossible": true,
+      "inZone": false,
+      "referenceTeam": "Fluminense"
+    },
+    {
+      "id": "pre-libertadores",
+      "label": "Pré-Libertadores",
+      "description": "Terminar entre os 6 primeiros (G6)",
+      "tone": "Entrar no continente já é conquista — o Fogão mira o caminho direto.",
+      "type": "reach_top",
+      "currentPosition": 7,
+      "currentPoints": 29,
+      "remainingMatches": 18,
+      "maxPoints": 83,
       "minPoints": 29,
       "cutoffPoints": 31,
       "pointsGap": 2,
@@ -54,8 +72,8 @@
       "type": "reach_range",
       "currentPosition": 7,
       "currentPoints": 29,
-      "remainingMatches": 6,
-      "maxPoints": 47,
+      "remainingMatches": 18,
+      "maxPoints": 83,
       "minPoints": 29,
       "cutoffPoints": 26,
       "pointsGap": 0,
@@ -66,15 +84,15 @@
       "zoneTopPoints": 29
     },
     {
-      "id": "evitar-z4",
-      "label": "Evitar o rebaixamento",
+      "id": "permanencia",
+      "label": "Permanência",
       "description": "Ficar fora da zona (17º ao 20º)",
       "tone": "Com foco e entrega, o caminho é para cima.",
       "type": "avoid_bottom",
       "currentPosition": 7,
       "currentPoints": 29,
-      "remainingMatches": 6,
-      "maxPoints": 47,
+      "remainingMatches": 18,
+      "maxPoints": 83,
       "minPoints": 29,
       "cutoffPoints": 21,
       "safetyLinePoints": 21,
@@ -84,7 +102,7 @@
       "inZone": true,
       "inDanger": false,
       "referenceTeam": "Vasco da Gama",
-      "dangerMaxPossible": 21
+      "dangerMaxPossible": 24
     }
   ]
 }

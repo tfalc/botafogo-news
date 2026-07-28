@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Compute points-needed scenarios for season objectives (FogaoNET-style)."""
+"""Compute points-needed scenarios for season objectives."""
 
 from __future__ import annotations
 
@@ -165,8 +165,24 @@ def main() -> int:
 
     snapshot = compute(standings, fixtures, config)
     out = CONTENT / "objectives" / "snapshot.json"
-    out.write_text(json.dumps(snapshot, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    print(f"Wrote {out}")
+    text = json.dumps(snapshot, ensure_ascii=False, indent=2) + "\n"
+    if out.exists():
+        try:
+            previous = json.loads(out.read_text(encoding="utf-8"))
+            previous.pop("generatedAt", None)
+            comparable = {**snapshot}
+            comparable.pop("generatedAt", None)
+            if previous == comparable:
+                print(f"Unchanged {out}")
+            else:
+                out.write_text(text, encoding="utf-8")
+                print(f"Wrote {out}")
+        except (json.JSONDecodeError, OSError):
+            out.write_text(text, encoding="utf-8")
+            print(f"Wrote {out}")
+    else:
+        out.write_text(text, encoding="utf-8")
+        print(f"Wrote {out}")
     for obj in snapshot["objectives"]:
         flag = "OK" if obj["stillPossible"] else "—"
         zone = "IN" if obj.get("inZone") else "OUT"

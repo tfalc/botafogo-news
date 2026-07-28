@@ -1,0 +1,74 @@
+<article class="fase" [class.fase--dim]="block().state === 'upcoming'">
+  <header class="fase__head">
+    <div>
+      <h3>{{ block().label }}</h3>
+      <p>
+        Rodadas {{ block().rounds[0] }}–{{ block().rounds[block().rounds.length - 1] }}
+      </p>
+    </div>
+    <p class="fase__pts">
+      <strong>{{ block().points | number: '2.0-0' }}</strong>
+      <span>/ {{ block().maxPoints }} pts</span>
+    </p>
+  </header>
+
+  <ul class="jogos">
+    @for (match of block().matches; track match.round) {
+      <li>
+        <span class="jogos__round">R{{ match.round }}</span>
+        <span class="jogos__teams">
+          <span [class.is-us]="match.isHome === true">{{ match.home }}</span>
+          <span class="vs">×</span>
+          <span [class.is-us]="match.isHome === false">{{ match.away }}</span>
+        </span>
+        <span class="jogos__score" [class.jogos__score--win]="match.result === 'W'">
+          @if (match.status === 'played') {
+            {{ scoreText(match) }}
+          } @else {
+            <span aria-hidden="true">⏳</span>
+            <span class="sr-only">A jogar</span>
+          }
+        </span>
+        @if (match.result) {
+          <span class="jogos__result" [attr.data-result]="match.result">
+            @switch (match.result) {
+              @case ('W') {
+                <span aria-hidden="true">✅</span>
+              }
+              @case ('D') {
+                <span aria-hidden="true">➖</span>
+              }
+              @case ('L') {
+                <span aria-hidden="true">❌</span>
+              }
+            }
+            <span class="sr-only">{{ match.result }}</span>
+          </span>
+        } @else {
+          <span class="jogos__result jogos__result--pending">·</span>
+        }
+      </li>
+    }
+  </ul>
+
+  <div class="saldo">
+    <h4>Saldo vs. meta da fase</h4>
+    <ul>
+      @for (obj of block().objectives; track obj.id) {
+        <li>
+          <span class="saldo__label">{{ obj.label }}</span>
+          <div class="saldo__nums">
+            <span>meta {{ obj.meta | number: '2.0-0' }}</span>
+            <strong [class.neg]="obj.acumulado < 0" [class.pos]="obj.acumulado >= 0">
+              {{ obj.acumulado > 0 ? '+' : '' }}{{ obj.acumulado }}
+            </strong>
+          </div>
+          <div class="saldo__track" aria-hidden="true">
+            <span class="saldo__meta" [style.width.%]="obj.metaPct"></span>
+            <span class="saldo__pts" [style.width.%]="obj.pointsPct"></span>
+          </div>
+        </li>
+      }
+    </ul>
+  </div>
+</article>
